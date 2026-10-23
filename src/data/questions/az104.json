@@ -1,0 +1,482 @@
+[
+  {
+    "id": "az104-001",
+    "cert": "az104",
+    "domain": "Identity",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which Microsoft Entra ID object represents a user identity that can sign in and be assigned roles?",
+    "options": [
+      { "id": "a", "text": "Management group" },
+      { "id": "b", "text": "User account" },
+      { "id": "c", "text": "Route table" },
+      { "id": "d", "text": "Availability set" }
+    ],
+    "correct": ["b"],
+    "explanation": "User accounts (and guest users) are Entra ID principals that authenticate. Management groups organise subscriptions; networking and compute objects are unrelated to sign-in identity."
+  },
+  {
+    "id": "az104-002",
+    "cert": "az104",
+    "domain": "Identity",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "You need to grant a colleague permission to manage only resources inside one resource group. Which Azure RBAC assignment scope is most appropriate?",
+    "options": [
+      { "id": "a", "text": "Tenant root" },
+      { "id": "b", "text": "Subscription" },
+      { "id": "c", "text": "Resource group" },
+      { "id": "d", "text": "Management group containing all subscriptions" }
+    ],
+    "correct": ["c"],
+    "explanation": "Assigning a role at the resource group scope limits access to that group's resources, following least privilege more tightly than subscription or management group scope."
+  },
+  {
+    "id": "az104-003",
+    "cert": "az104",
+    "domain": "Governance",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Which Azure feature can deny creation of public IP addresses across a subscription using a declarative policy?",
+    "options": [
+      { "id": "a", "text": "Azure Policy" },
+      { "id": "b", "text": "Azure Advisor cost tip only" },
+      { "id": "c", "text": "Azure Bastion" },
+      { "id": "d", "text": "Azure Front Door WAF alone" }
+    ],
+    "correct": ["a"],
+    "explanation": "Azure Policy evaluates and can deny or audit resource properties at assignment scope. Bastion and Front Door solve connectivity/WAF use cases, not subscription-wide create denials."
+  },
+  {
+    "id": "az104-004",
+    "cert": "az104",
+    "domain": "Storage",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which Azure Storage service is optimised for storing unstructured objects such as backups, images, and logs accessible via HTTP(S)?",
+    "options": [
+      { "id": "a", "text": "Azure Blob Storage" },
+      { "id": "b", "text": "Azure Files only for block blobs" },
+      { "id": "c", "text": "Azure Queue Storage for large video files" },
+      { "id": "d", "text": "Azure Table Storage for binary VHD mounts" }
+    ],
+    "correct": ["a"],
+    "explanation": "Blob Storage is the object store for unstructured data. Queues are for messages; Tables for structured NoSQL entities; Files is SMB/NFS file shares."
+  },
+  {
+    "id": "az104-005",
+    "cert": "az104",
+    "domain": "Storage",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A storage account must remain accessible if an entire Azure region fails. Which redundancy option provides cross-region replication?",
+    "options": [
+      { "id": "a", "text": "LRS (Locally-redundant storage)" },
+      { "id": "b", "text": "ZRS within one region only" },
+      { "id": "c", "text": "GRS or GZRS (geo-redundant options)" },
+      { "id": "d", "text": "Premium SSD attached to a single VM" }
+    ],
+    "correct": ["c"],
+    "explanation": "GRS/RA-GRS and GZRS/RA-GZRS replicate data to a secondary region. LRS and ZRS protect within a region (or zone) but not against full regional loss."
+  },
+  {
+    "id": "az104-006",
+    "cert": "az104",
+    "domain": "Compute",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which Azure compute option gives you full control of a guest OS on a virtual machine you manage?",
+    "options": [
+      { "id": "a", "text": "Azure Functions consumption plan" },
+      { "id": "b", "text": "Azure Virtual Machines" },
+      { "id": "c", "text": "Azure SQL Database serverless" },
+      { "id": "d", "text": "Azure CDN endpoint" }
+    ],
+    "correct": ["b"],
+    "explanation": "Virtual Machines are IaaS: you manage the OS and software. Functions and Azure SQL are PaaS; CDN is a content delivery service."
+  },
+  {
+    "id": "az104-007",
+    "cert": "az104",
+    "domain": "Compute",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "You need to ensure VMs in a scale set stay available if a single datacenter rack fails within a region. Which configuration helps?",
+    "options": [
+      { "id": "a", "text": "Place all VMs in one availability zone only without spreading" },
+      { "id": "b", "text": "Use availability zones or an availability set with fault/update domains" },
+      { "id": "c", "text": "Disable load balancing" },
+      { "id": "d", "text": "Use a single instance VM with no redundancy" }
+    ],
+    "correct": ["b"],
+    "explanation": "Availability zones and availability sets distribute VMs across fault domains so rack or zone failures do not take down every instance."
+  },
+  {
+    "id": "az104-008",
+    "cert": "az104",
+    "domain": "Networking",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "What is the primary purpose of an Azure Virtual Network (VNet)?",
+    "options": [
+      { "id": "a", "text": "To provide an isolated private network for Azure resources" },
+      { "id": "b", "text": "To store blob snapshots" },
+      { "id": "c", "text": "To replace Entra ID Conditional Access" },
+      { "id": "d", "text": "To compile ARM templates" }
+    ],
+    "correct": ["a"],
+    "explanation": "A VNet is the foundational private network boundary where NICs, subnets, and private IPs live for IaaS and many PaaS integrations."
+  },
+  {
+    "id": "az104-009",
+    "cert": "az104",
+    "domain": "Networking",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Two VNets in the same region need private IP connectivity without going over the public internet. Which feature connects them?",
+    "options": [
+      { "id": "a", "text": "VNet peering" },
+      { "id": "b", "text": "Azure CDN purge" },
+      { "id": "c", "text": "Blob soft delete" },
+      { "id": "d", "text": "Azure DevOps board" }
+    ],
+    "correct": ["a"],
+    "explanation": "VNet peering links VNets for private connectivity. CDN, soft delete, and boards do not interconnect VNets."
+  },
+  {
+    "id": "az104-010",
+    "cert": "az104",
+    "domain": "Networking",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "You want to filter inbound traffic to a subnet hosting web VMs, allowing only HTTPS from the internet. Which resource is commonly attached to the subnet for this?",
+    "options": [
+      { "id": "a", "text": "Network Security Group (NSG)" },
+      { "id": "b", "text": "Recovery Services vault" },
+      { "id": "c", "text": "Azure App Configuration" },
+      { "id": "d", "text": "Log Analytics workspace alone" }
+    ],
+    "correct": ["a"],
+    "explanation": "NSGs contain allow/deny rules for network traffic at NIC or subnet association. Vaults and App Configuration are not packet filters."
+  },
+  {
+    "id": "az104-011",
+    "cert": "az104",
+    "domain": "Identity",
+    "difficulty": "hard",
+    "type": "multiple",
+    "prompt": "Which statements about Azure role-based access control (RBAC) are correct? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Role assignments bind a security principal to a role definition at a scope" },
+      { "id": "b", "text": "Built-in roles like Reader and Contributor cover common scenarios" },
+      { "id": "c", "text": "RBAC assignments always bypass Conditional Access sign-in requirements" },
+      { "id": "d", "text": "Custom roles can define a precise actions/notActions set" }
+    ],
+    "correct": ["a", "b", "d"],
+    "explanation": "RBAC controls Azure resource authorisation after authentication. Conditional Access still applies to sign-in; it is not bypassed by a role assignment."
+  },
+  {
+    "id": "az104-012",
+    "cert": "az104",
+    "domain": "Compute",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "An administrator needs secure RDP/SSH to VMs without exposing public RDP/SSH ports on each VM. Which Azure service provides a managed jump host pattern?",
+    "options": [
+      { "id": "a", "text": "Azure Bastion" },
+      { "id": "b", "text": "Azure Blob anonymous access" },
+      { "id": "c", "text": "Azure DNS private zone only" },
+      { "id": "d", "text": "Azure Marketplace" }
+    ],
+    "correct": ["a"],
+    "explanation": "Azure Bastion provides browser-based or native client connectivity to VMs over private IPs via the Bastion host in the VNet."
+  },
+  {
+    "id": "az104-013",
+    "cert": "az104",
+    "domain": "Storage",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Which feature helps recover a blob that was deleted recently within the retention window?",
+    "options": [
+      { "id": "a", "text": "Soft delete for blobs" },
+      { "id": "b", "text": "NSG flow logs" },
+      { "id": "c", "text": "VM proximity placement group" },
+      { "id": "d", "text": "ExpressRoute FastPath" }
+    ],
+    "correct": ["a"],
+    "explanation": "Blob soft delete retains deleted blobs for a configured retention period so they can be undeleted."
+  },
+  {
+    "id": "az104-014",
+    "cert": "az104",
+    "domain": "Monitoring",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which service is the primary destination for collecting logs and metrics queries across Azure resources using Kusto Query Language (KQL)?",
+    "options": [
+      { "id": "a", "text": "Azure Log Analytics workspace (via Azure Monitor)" },
+      { "id": "b", "text": "Azure Blob cool tier exclusively" },
+      { "id": "c", "text": "Azure Front Door rules engine" },
+      { "id": "d", "text": "Azure Blueprints (legacy) definition" }
+    ],
+    "correct": ["a"],
+    "explanation": "Log Analytics workspaces store and query monitoring data. Azure Monitor routes metrics/logs there for analysis and alerts."
+  },
+  {
+    "id": "az104-015",
+    "cert": "az104",
+    "domain": "Networking",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "A company needs private connectivity from on-premises to Azure with consistent bandwidth and an SLA, not a VPN over the public internet. Which option fits?",
+    "options": [
+      { "id": "a", "text": "Azure ExpressRoute" },
+      { "id": "b", "text": "Public IP on a storage account" },
+      { "id": "c", "text": "Azure Cloud Shell" },
+      { "id": "d", "text": "GitHub Codespaces" }
+    ],
+    "correct": ["a"],
+    "explanation": "ExpressRoute provides private peering connectivity through a connectivity provider, separate from internet-based VPN."
+  },
+  {
+    "id": "az104-016",
+    "cert": "az104",
+    "domain": "Compute",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "You must apply the same custom script extension configuration to many identical VMs that auto-scale. Which compute resource simplifies uniform VM management?",
+    "options": [
+      { "id": "a", "text": "Virtual Machine Scale Sets" },
+      { "id": "b", "text": "Single classic cloud service (legacy) only" },
+      { "id": "c", "text": "One unmanaged disk snapshot per hour without a scale set" },
+      { "id": "d", "text": "Azure Static Web Apps" }
+    ],
+    "correct": ["a"],
+    "explanation": "VM Scale Sets manage a pool of identical VMs with shared configuration, autoscale, and rolling upgrades."
+  },
+  {
+    "id": "az104-017",
+    "cert": "az104",
+    "domain": "Governance",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "What do Azure resource locks (CanNotDelete / ReadOnly) primarily protect against?",
+    "options": [
+      { "id": "a", "text": "Accidental deletion or modification by authorised users" },
+      { "id": "b", "text": "DDoS packets at the network edge" },
+      { "id": "c", "text": "Expired TLS certificates on App Service" },
+      { "id": "d", "text": "High CPU on a VM" }
+    ],
+    "correct": ["a"],
+    "explanation": "Locks are management-plane controls that block delete or all changes, even for owners, until the lock is removed."
+  },
+  {
+    "id": "az104-018",
+    "cert": "az104",
+    "domain": "Identity",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "An application running on an Azure VM needs to access Azure Key Vault without storing a client secret in code. What should you configure?",
+    "options": [
+      { "id": "a", "text": "A managed identity on the VM and an access policy/RBAC grant on the vault" },
+      { "id": "b", "text": "Anonymous blob access" },
+      { "id": "c", "text": "A public RDP port" },
+      { "id": "d", "text": "Disable HTTPS on Key Vault" }
+    ],
+    "correct": ["a"],
+    "explanation": "Managed identities provide an Entra ID identity for Azure resources so apps can obtain tokens without embedded secrets."
+  },
+  {
+    "id": "az104-019",
+    "cert": "az104",
+    "domain": "Storage",
+    "difficulty": "hard",
+    "type": "multiple",
+    "prompt": "Which practices harden an Azure Storage account? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Disable anonymous public blob access when not required" },
+      { "id": "b", "text": "Prefer private endpoints or firewall rules limiting public network access" },
+      { "id": "c", "text": "Share the account key in a public wiki for convenience" },
+      { "id": "d", "text": "Use Azure AD / RBAC for data-plane access where supported" }
+    ],
+    "correct": ["a", "b", "d"],
+    "explanation": "Least privilege, network isolation, and avoiding shared key sprawl reduce risk. Publishing account keys publicly is unsafe."
+  },
+  {
+    "id": "az104-020",
+    "cert": "az104",
+    "domain": "Networking",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Which Azure load balancer operates at layer 4 (TCP/UDP) for traffic inside a region to VM backends?",
+    "options": [
+      { "id": "a", "text": "Azure Load Balancer" },
+      { "id": "b", "text": "Azure Application Gateway only (layer 7 exclusive product)" },
+      { "id": "c", "text": "Azure Content Delivery Network" },
+      { "id": "d", "text": "Azure Policy assignment" }
+    ],
+    "correct": ["a"],
+    "explanation": "Azure Load Balancer is the regional L4 balancer. Application Gateway is L7 HTTP(S); CDN caches content at the edge."
+  },
+  {
+    "id": "az104-021",
+    "cert": "az104",
+    "domain": "Compute",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Where are Azure VM disks such as OS and data disks typically stored as page blobs or managed disks?",
+    "options": [
+      { "id": "a", "text": "In Azure Storage as managed disks backed by storage" },
+      { "id": "b", "text": "Inside the Entra ID tenant configuration blade only" },
+      { "id": "c", "text": "In Azure DNS zone records" },
+      { "id": "d", "text": "In NSG rule priorities" }
+    ],
+    "correct": ["a"],
+    "explanation": "Managed disks abstract storage accounts and hold OS/data disks for VMs in Azure Storage infrastructure."
+  },
+  {
+    "id": "az104-022",
+    "cert": "az104",
+    "domain": "Monitoring",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "You want an email when average CPU on a VM exceeds 90% for 10 minutes. Which Azure Monitor capability do you configure?",
+    "options": [
+      { "id": "a", "text": "A metric alert rule" },
+      { "id": "b", "text": "A storage lifecycle rule" },
+      { "id": "c", "text": "A VNet service endpoint" },
+      { "id": "d", "text": "A proximity placement group" }
+    ],
+    "correct": ["a"],
+    "explanation": "Metric alerts evaluate platform or custom metrics against thresholds and can notify via action groups (email, webhook, etc.)."
+  },
+  {
+    "id": "az104-023",
+    "cert": "az104",
+    "domain": "Governance",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Management groups sit above subscriptions in the Azure resource hierarchy. What is a primary reason to use them?",
+    "options": [
+      { "id": "a", "text": "Apply policies and RBAC inheritance across many subscriptions" },
+      { "id": "b", "text": "Increase a single VM's vCPU count beyond the SKU" },
+      { "id": "c", "text": "Replace virtual networks" },
+      { "id": "d", "text": "Host container images instead of ACR" }
+    ],
+    "correct": ["a"],
+    "explanation": "Management groups organise subscriptions so governance (Policy, RBAC) can be applied once and inherited downward."
+  },
+  {
+    "id": "az104-024",
+    "cert": "az104",
+    "domain": "Networking",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "User-defined routes (UDR) on a subnet force traffic to an NVA appliance. Which next hop type is typical for that pattern?",
+    "options": [
+      { "id": "a", "text": "Virtual appliance (private IP of the NVA)" },
+      { "id": "b", "text": "Internet for all private RFC1918 destinations exclusively" },
+      { "id": "c", "text": "None (drops all VNet traffic permanently by default without rules)" },
+      { "id": "d", "text": "VNet peering disabled automatically" }
+    ],
+    "correct": ["a"],
+    "explanation": "UDRs often set next hop type Virtual appliance to the NVA's IP so inspection/egress control is centralised."
+  },
+  {
+    "id": "az104-025",
+    "cert": "az104",
+    "domain": "Identity",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which Entra ID feature groups users to simplify role and license assignment?",
+    "options": [
+      { "id": "a", "text": "Security / Microsoft 365 groups" },
+      { "id": "b", "text": "Availability zones" },
+      { "id": "c", "text": "Managed disks" },
+      { "id": "d", "text": "Load balancer backend pools" }
+    ],
+    "correct": ["a"],
+    "explanation": "Groups collect users (and sometimes devices) so admins assign access and licenses once to the group."
+  },
+  {
+    "id": "az104-026",
+    "cert": "az104",
+    "domain": "Compute",
+    "difficulty": "hard",
+    "type": "multiple",
+    "prompt": "Which actions are valid ways to improve Azure VM backup posture? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Protect VMs with Azure Backup using a Recovery Services vault" },
+      { "id": "b", "text": "Test restores periodically" },
+      { "id": "c", "text": "Store vault credentials in a public storage container" },
+      { "id": "d", "text": "Use backup policies with appropriate retention" }
+    ],
+    "correct": ["a", "b", "d"],
+    "explanation": "Vault-based backup, tested restores, and retention policies matter. Exposing credentials publicly undermines security."
+  },
+  {
+    "id": "az104-027",
+    "cert": "az104",
+    "domain": "Storage",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Azure Files is commonly mounted by Windows or Linux clients using which protocols?",
+    "options": [
+      { "id": "a", "text": "SMB and/or NFS (depending on share configuration)" },
+      { "id": "b", "text": "RDP only" },
+      { "id": "c", "text": "ICMP exclusively" },
+      { "id": "d", "text": "SMTP" }
+    ],
+    "correct": ["a"],
+    "explanation": "Azure Files supports SMB and NFS access for shared file storage scenarios."
+  },
+  {
+    "id": "az104-028",
+    "cert": "az104",
+    "domain": "Monitoring",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Activity Log in Azure records which kind of operations?",
+    "options": [
+      { "id": "a", "text": "Subscription-level management operations (control plane) such as creating a VM" },
+      { "id": "b", "text": "Every packet inside a VNet by default without NSG flow logs" },
+      { "id": "c", "text": "Keystrokes inside a VM desktop session" },
+      { "id": "d", "text": "SQL row-level changes in every database automatically" }
+    ],
+    "correct": ["a"],
+    "explanation": "Azure Activity Log tracks control-plane events on the subscription. Data-plane packet or guest OS auditing needs other tools."
+  },
+  {
+    "id": "az104-029",
+    "cert": "az104",
+    "domain": "Networking",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Private DNS zones in Azure are typically linked to VNets so that:",
+    "options": [
+      { "id": "a", "text": "VMs resolve private resource names without relying on public DNS for those zones" },
+      { "id": "b", "text": "Public websites automatically get free TLS" },
+      { "id": "c", "text": "NSGs are no longer evaluated" },
+      { "id": "d", "text": "Managed disks encrypt themselves twice" }
+    ],
+    "correct": ["a"],
+    "explanation": "VNet links to private DNS zones enable name resolution for private endpoints and custom private domains inside the network."
+  },
+  {
+    "id": "az104-030",
+    "cert": "az104",
+    "domain": "Governance",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Tags on Azure resources are primarily used to:",
+    "options": [
+      { "id": "a", "text": "Organise cost tracking, ownership, and automation filters" },
+      { "id": "b", "text": "Increase network throughput of a NIC" },
+      { "id": "c", "text": "Replace NSG rules" },
+      { "id": "d", "text": "Disable Azure AD authentication" }
+    ],
+    "correct": ["a"],
+    "explanation": "Tags are metadata key/value pairs used for chargeback, inventory, and policy/automation targeting—not for packet filtering or auth."
+  }
+]
