@@ -1,10 +1,13 @@
 {
   "name": "cert-exam-trainer",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "license": "UNLICENSED",
   "author": "Shohrab Hossen Niaz",
   "description": "Duolingo-style daily practice trainer for top cloud & security exams (CKA, AWS SAA-C03, AWS CLF-C02, AZ-104, Security+).",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

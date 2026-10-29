@@ -14,6 +14,7 @@ const BANK: Record<CertId, Question[]> = {
 };
 
 export const DAILY_QUIZ_SIZE = 7;
+export const PRACTICE_QUIZ_SIZE = 7;
 
 export function getQuestions(cert: CertId): Question[] {
   return BANK[cert];
@@ -46,6 +47,26 @@ export function buildDailyQuiz(
   const fresh = shuffled.filter((q) => !seen.has(q.id));
   const recycled = shuffled.filter((q) => seen.has(q.id));
 
+  return [...fresh, ...recycled].slice(0, Math.min(size, all.length));
+}
+
+/**
+ * Extra practice set: seeded by cert + day + attempt so free users cannot
+ * reshuffle endlessly for easier draws within the same attempt index.
+ */
+export function buildPracticeQuiz(
+  cert: CertId,
+  dateKey: string,
+  attemptIndex: number,
+  seenQuestionIds: string[],
+  size = PRACTICE_QUIZ_SIZE,
+): Question[] {
+  const all = BANK[cert];
+  const seed = hashSeed(`${cert}:practice:${dateKey}:${attemptIndex}`);
+  const shuffled = seededShuffle(all, seed);
+  const seen = new Set(seenQuestionIds);
+  const fresh = shuffled.filter((q) => !seen.has(q.id));
+  const recycled = shuffled.filter((q) => seen.has(q.id));
   return [...fresh, ...recycled].slice(0, Math.min(size, all.length));
 }
 

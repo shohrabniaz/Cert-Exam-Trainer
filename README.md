@@ -1,8 +1,10 @@
 # Cert Exam Trainer
 
-Duolingo-style daily practice for **top certification exams** — with streaks and simple progress stats.
+Duolingo-style daily practice for **top certification exams** — with streaks, stats, freemium practice limits, and local backups.
 
-**Featured trainings**
+Built by **Shohrab Hossen Niaz** ([@shohrabniaz](https://github.com/shohrabniaz)), a CKA-certified DevOps engineer.
+
+## Top exam trainings
 
 | Exam | Provider | Focus |
 | --- | --- | --- |
@@ -12,33 +14,34 @@ Duolingo-style daily practice for **top certification exams** — with streaks a
 | **AZ-104** | Microsoft | Azure Administrator |
 | **Security+** | CompTIA | Core cybersecurity |
 
-Built as a freemium product foundation by **Shohrab Hossen Niaz** ([@shohrabniaz](https://github.com/shohrabniaz)), a CKA-certified DevOps engineer.
+## Features (v1.0)
 
-## Week 1 features
+- Next.js 14 + TypeScript + Tailwind PWA
+- ~30 original questions per cert (not exam dumps)
+- Daily quiz (7 questions, deterministic per cert + date)
+- Extra practice mode with freemium daily limit
+- Answer feedback with explanations
+- Streaks + per-cert / per-domain stats
+- Onboarding tip, Pro preview unlock, settings with export/import
+- Local-first `localStorage` (no account required yet)
 
-- Next.js 14 + TypeScript + Tailwind CSS progressive web app (PWA)
-- Original JSON question banks (~30 questions per cert) — not copied from exam dumps
-- Daily quiz flow (7 questions/day, deterministic per cert + date)
-- Immediate answer feedback with explanations
-- Streak counter and per-cert progress (seen count, accuracy, recent history)
-- Local-first persistence via `localStorage` (no backend or account required)
+## Free vs Pro
 
-## Stack (free / low-cost)
-
-| Layer | Choice | Why |
+| | Free | Pro (preview / coming soon) |
 | --- | --- | --- |
-| App | Next.js (App Router) + TypeScript | Fast to ship, great DX, easy Vercel free hosting |
-| UI | Tailwind CSS | Utility styling without a design-system tax |
-| Data | Static JSON question banks | Zero DB cost for week 1 |
-| Progress | Browser `localStorage` | No auth/backend yet |
-| Offline | Minimal service worker + web manifest | Installable PWA |
+| Daily quiz per cert | Unlimited | Unlimited |
+| Extra practice sets / day | 1 | Unlimited |
+| Streaks & stats | Yes | Yes |
+| Cloud sync / Stripe | — | Roadmap |
+
+Use **Pro → Unlock Pro preview (local)** to demo unlimited practice on a device before payments ship.
 
 ## Setup
 
 Requirements: Node.js 18+ and npm.
 
 ```bash
-git clone <this-repo-url>
+git clone https://github.com/shohrabniaz/Cert-Exam-Trainer.git
 cd Cert-Exam-Trainer
 npm install
 ```
@@ -46,24 +49,28 @@ npm install
 ## Run
 
 ```bash
-# development
 npm run dev
-# open http://localhost:3000
+# http://localhost:3000
 
-# production build
-npm run build
-npm start
+npm run build && npm start
+npm run lint
 ```
 
-Lint:
+## Deploy (Vercel)
+
+1. Import `https://github.com/shohrabniaz/Cert-Exam-Trainer` in Vercel
+2. Framework preset: Next.js (see `vercel.json`)
+3. Deploy — no env vars required for v1
+
+Or:
 
 ```bash
-npm run lint
+npx vercel
 ```
 
 ## Question bank format
 
-Questions live in `src/data/questions/{cka,aws-saa,aws-clf,az104,securityplus}.json`.
+Files: `src/data/questions/{cka,aws-saa,aws-clf,az104,securityplus}.json`
 
 ```json
 {
@@ -73,41 +80,24 @@ Questions live in `src/data/questions/{cka,aws-saa,aws-clf,az104,securityplus}.j
   "difficulty": "easy",
   "type": "single",
   "prompt": "…",
-  "options": [
-    { "id": "a", "text": "…" },
-    { "id": "b", "text": "…" }
-  ],
+  "options": [{ "id": "a", "text": "…" }],
   "correct": ["b"],
   "explanation": "…"
 }
 ```
 
-- `type`: `single` (one answer) or `multiple` (select all that apply)
-- `correct`: array of option ids
-- All sample items are **original study aids** written for this project. They are not affiliated with CNCF, AWS, Microsoft, or CompTIA exam content.
+Original study aids only — not affiliated with CNCF, AWS, Microsoft, or CompTIA.
 
-## Product roadmap
+## Roadmap
 
-1. **Week 1 (this release)** — PWA shell, original banks (CKA + AWS + Azure + Security+), daily quiz, streaks, local stats
-2. **Week 2** — Accounts (e.g. Supabase/Auth.js free tier), sync progress across devices
-3. **Week 3** — Freemium gate: free daily set + paid expanded banks / weak-area drills
-4. **Week 4** — Spaced repetition, domain performance charts, email reminders
-5. **Later** — More AWS associate exams (DVA/SOA), payments (Stripe), admin question editor
-
-## Project layout
-
-```
-src/
-  app/                 # Next.js routes
-  components/          # UI
-  data/questions/      # JSON banks
-  hooks/               # client state
-  lib/                 # types, storage, quiz selection
-public/                # PWA manifest, icons, service worker
-```
+1. ~~PWA + banks + daily quiz + streaks~~
+2. ~~Stats, practice mode, freemium gate, settings/backup~~
+3. Accounts + cross-device sync (Supabase / Auth.js)
+4. Stripe billing for Pro
+5. Spaced repetition + email reminders + more AWS associate banks
 
 ## Copyright
 
 Copyright (c) 2026 Shohrab Hossen Niaz. All rights reserved.
 
-This project is proprietary software. See [`LICENSE`](./LICENSE). The `package.json` license field is set to `UNLICENSED`. No permission is granted to copy, modify, distribute, or use this code without written permission from the copyright holder.
+See [`LICENSE`](./LICENSE). `package.json` license is `UNLICENSED`. No permission is granted to copy, modify, distribute, or use this code without written permission from the copyright holder.

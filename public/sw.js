@@ -1,6 +1,6 @@
 /* Cert Exam Trainer — minimal offline shell cache (week 1). */
-const CACHE = "cert-trainer-v1";
-const PRECACHE = ["/", "/manifest.webmanifest", "/icons/icon-192.png"];
+const CACHE = "cert-trainer-v2";
+const PRECACHE = ["/", "/manifest.webmanifest", "/icons/icon-192.png", "/favicon.ico"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

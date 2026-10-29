@@ -5,6 +5,8 @@ export type CertId =
   | "az104"
   | "securityplus";
 
+export type QuizMode = "daily" | "practice";
+
 export interface CertMeta {
   id: CertId;
   name: string;
@@ -42,6 +44,7 @@ export interface AnswerRecord {
 export interface QuizResult {
   cert: CertId;
   dateKey: string;
+  mode: QuizMode;
   total: number;
   correctCount: number;
   answers: AnswerRecord[];
@@ -62,9 +65,17 @@ export interface StreakState {
   totalDaysActive: number;
 }
 
+export interface UserSettings {
+  onboardingDismissed: boolean;
+  /** Local preview unlock until Stripe/auth ships. */
+  proUnlocked: boolean;
+  practiceCompletionsByDate: Record<string, number>;
+}
+
 export interface ProgressState {
   version: number;
   streak: StreakState;
   certs: Record<CertId, CertProgress>;
   history: QuizResult[];
+  settings: UserSettings;
 }
