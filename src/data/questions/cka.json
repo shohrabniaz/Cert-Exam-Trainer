@@ -1,0 +1,482 @@
+[
+  {
+    "id": "cka-001",
+    "cert": "cka",
+    "domain": "Cluster Architecture",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which Kubernetes control-plane component is the authoritative source of cluster state that other components watch and update?",
+    "options": [
+      { "id": "a", "text": "kube-scheduler" },
+      { "id": "b", "text": "etcd" },
+      { "id": "c", "text": "kube-proxy" },
+      { "id": "d", "text": "cloud-controller-manager" }
+    ],
+    "correct": ["b"],
+    "explanation": "etcd stores the cluster's desired and observed state. Controllers and API consumers read and write through the API server, which persists that state in etcd."
+  },
+  {
+    "id": "cka-002",
+    "cert": "cka",
+    "domain": "Workloads",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "A Deployment named web has three replicas. You need to scale it to five without editing the YAML file by hand. Which kubectl command is appropriate?",
+    "options": [
+      { "id": "a", "text": "kubectl scale deployment web --replicas=5" },
+      { "id": "b", "text": "kubectl resize deployment web 5" },
+      { "id": "c", "text": "kubectl set replicas deployment/web 5" },
+      { "id": "d", "text": "kubectl rollout scale web --to=5" }
+    ],
+    "correct": ["a"],
+    "explanation": "kubectl scale updates the replicas field on scalable resources such as Deployments. The other command forms are not valid kubectl syntax for this task."
+  },
+  {
+    "id": "cka-003",
+    "cert": "cka",
+    "domain": "Networking",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A Service of type ClusterIP cannot be reached from outside the cluster by design. Which Service type exposes the Service on each node's IP at a static port?",
+    "options": [
+      { "id": "a", "text": "ExternalName" },
+      { "id": "b", "text": "Headless" },
+      { "id": "c", "text": "NodePort" },
+      { "id": "d", "text": "Local" }
+    ],
+    "correct": ["c"],
+    "explanation": "NodePort allocates a port on every node and forwards traffic to the Service's ClusterIP backends. LoadBalancer builds on NodePort; ExternalName maps to a DNS name."
+  },
+  {
+    "id": "cka-004",
+    "cert": "cka",
+    "domain": "Storage",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A Pod needs a volume that survives Pod restarts and is provisioned dynamically from a StorageClass. Which object typically binds a PersistentVolumeClaim to an actual volume?",
+    "options": [
+      { "id": "a", "text": "ConfigMap" },
+      { "id": "b", "text": "PersistentVolume" },
+      { "id": "c", "text": "ReplicaSet" },
+      { "id": "d", "text": "EndpointSlice" }
+    ],
+    "correct": ["b"],
+    "explanation": "A PersistentVolumeClaim requests storage; a PersistentVolume (often dynamically created via a StorageClass) satisfies that claim and is mounted into the Pod."
+  },
+  {
+    "id": "cka-005",
+    "cert": "cka",
+    "domain": "Troubleshooting",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Pods in a Deployment stay in Pending with the event \"0/3 nodes are available: 3 Insufficient cpu\". What is the most direct next check?",
+    "options": [
+      { "id": "a", "text": "Delete the kube-apiserver Pod" },
+      { "id": "b", "text": "Compare Pod resource requests against node allocatable capacity" },
+      { "id": "c", "text": "Increase the Service ClusterIP range" },
+      { "id": "d", "text": "Disable RBAC on the cluster" }
+    ],
+    "correct": ["b"],
+    "explanation": "Pending with Insufficient cpu means no node has enough free allocatable CPU for the Pod's requests. Inspect requests/limits and node capacity before changing control-plane components."
+  },
+  {
+    "id": "cka-006",
+    "cert": "cka",
+    "domain": "Security",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "You want a Pod to run with a non-root user and disallow privilege escalation. Which API object is commonly used to enforce these constraints cluster-wide or per namespace?",
+    "options": [
+      { "id": "a", "text": "NetworkPolicy" },
+      { "id": "b", "text": "PodDisruptionBudget" },
+      { "id": "c", "text": "PodSecurityPolicy successor controls such as Pod Security Admission / SecurityContext constraints" },
+      { "id": "d", "text": "HorizontalPodAutoscaler" }
+    ],
+    "correct": ["c"],
+    "explanation": "Pod security settings (via Pod Security Admission standards or equivalent policies) enforce runAsNonRoot, allowPrivilegeEscalation=false, and related constraints. NetworkPolicy governs traffic, not process privileges."
+  },
+  {
+    "id": "cka-007",
+    "cert": "cka",
+    "domain": "Workloads",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which controller is designed for Pods that need stable network identity and ordered, graceful deployment and scaling?",
+    "options": [
+      { "id": "a", "text": "Deployment" },
+      { "id": "b", "text": "DaemonSet" },
+      { "id": "c", "text": "StatefulSet" },
+      { "id": "d", "text": "Job" }
+    ],
+    "correct": ["c"],
+    "explanation": "StatefulSets give each Pod a sticky identity (ordinal name, stable DNS) and support ordered rollouts—useful for databases and other stateful apps."
+  },
+  {
+    "id": "cka-008",
+    "cert": "cka",
+    "domain": "Cluster Architecture",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "The kube-scheduler decides which node should run a newly created Pod. What does it primarily evaluate before binding the Pod?",
+    "options": [
+      { "id": "a", "text": "Container image digests only" },
+      { "id": "b", "text": "Filtering (predicates) then scoring (priorities) against node constraints and preferences" },
+      { "id": "c", "text": "Only the alphabetical order of node names" },
+      { "id": "d", "text": "Whether etcd has a majority of voters" }
+    ],
+    "correct": ["b"],
+    "explanation": "Scheduling filters out nodes that cannot run the Pod, then scores remaining nodes using priorities (affinity, resources, etc.) and binds the Pod to the chosen node."
+  },
+  {
+    "id": "cka-009",
+    "cert": "cka",
+    "domain": "Networking",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "Two Deployments in the same namespace must not talk to each other, but both must still receive traffic from an Ingress controller Pod in another namespace. What is the standard Kubernetes mechanism for this?",
+    "options": [
+      { "id": "a", "text": "ResourceQuota" },
+      { "id": "b", "text": "NetworkPolicy with selective ingress rules" },
+      { "id": "c", "text": "LimitRange" },
+      { "id": "d", "text": "PriorityClass" }
+    ],
+    "correct": ["b"],
+    "explanation": "NetworkPolicies define allowed ingress/egress based on selectors and namespaces. Quotas and LimitRanges manage resources, not L3/L4 connectivity."
+  },
+  {
+    "id": "cka-010",
+    "cert": "cka",
+    "domain": "Troubleshooting",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A container repeatedly exits and the Pod shows CrashLoopBackOff. Which command pair helps you inspect recent logs and describe events?",
+    "options": [
+      { "id": "a", "text": "kubectl logs <pod> and kubectl describe pod <pod>" },
+      { "id": "b", "text": "kubectl cordon <pod> and kubectl drain <pod>" },
+      { "id": "c", "text": "kubectl auth can-i and kubectl api-resources" },
+      { "id": "d", "text": "kubectl taint nodes and kubectl uncordon" }
+    ],
+    "correct": ["a"],
+    "explanation": "CrashLoopBackOff usually means the process exits. Logs show stdout/stderr; describe surfaces events such as OOMKilled, failed probes, or image pull errors."
+  },
+  {
+    "id": "cka-011",
+    "cert": "cka",
+    "domain": "Workloads",
+    "difficulty": "medium",
+    "type": "multiple",
+    "prompt": "Which of the following are valid reasons a rolling update of a Deployment might stall? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Readiness probe keeps failing on new Pods" },
+      { "id": "b", "text": "maxUnavailable and maxSurge settings leave no room to create new Pods" },
+      { "id": "c", "text": "The Service selector matches the Pod labels" },
+      { "id": "d", "text": "ImagePullBackOff on the new ReplicaSet" }
+    ],
+    "correct": ["a", "b", "d"],
+    "explanation": "Failed readiness, tight surge/unavailable settings, and image pull failures can block progress. A correctly matching Service selector is normal and does not stall rollouts."
+  },
+  {
+    "id": "cka-012",
+    "cert": "cka",
+    "domain": "Security",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Where should you store a database password that a Pod will mount as an environment variable or file?",
+    "options": [
+      { "id": "a", "text": "In a ConfigMap committed to git" },
+      { "id": "b", "text": "In a Secret (ideally backed by encryption at rest / external secret store)" },
+      { "id": "c", "text": "Hard-coded in the container image" },
+      { "id": "d", "text": "In the Pod's hostname field" }
+    ],
+    "correct": ["b"],
+    "explanation": "Secrets are the Kubernetes object intended for sensitive data. ConfigMaps are for non-secret config; images and hostnames are inappropriate for credentials."
+  },
+  {
+    "id": "cka-013",
+    "cert": "cka",
+    "domain": "Cluster Architecture",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "You are upgrading a kubeadm-managed cluster. Which component should typically be upgraded first?",
+    "options": [
+      { "id": "a", "text": "kubelet on worker nodes" },
+      { "id": "b", "text": "control plane (kubeadm upgrade apply on the primary control-plane node)" },
+      { "id": "c", "text": "CNI plugin only" },
+      { "id": "d", "text": "application Deployments" }
+    ],
+    "correct": ["b"],
+    "explanation": "kubeadm upgrades generally start with the control plane, then kubelets/kubectl on nodes, following version skew rules so workers are not ahead of the API server."
+  },
+  {
+    "id": "cka-014",
+    "cert": "cka",
+    "domain": "Storage",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "An emptyDir volume is deleted when which of the following happens?",
+    "options": [
+      { "id": "a", "text": "A container in the Pod restarts" },
+      { "id": "b", "text": "The Pod is removed from the node" },
+      { "id": "c", "text": "A ConfigMap is updated" },
+      { "id": "d", "text": "The Service endpoints change" }
+    ],
+    "correct": ["b"],
+    "explanation": "emptyDir lives for the lifetime of the Pod on that node. Container restarts keep the same emptyDir; deleting the Pod removes it."
+  },
+  {
+    "id": "cka-015",
+    "cert": "cka",
+    "domain": "Networking",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "DNS for Services is typically provided by which cluster addon?",
+    "options": [
+      { "id": "a", "text": "metrics-server" },
+      { "id": "b", "text": "CoreDNS" },
+      { "id": "c", "text": "kube-state-metrics" },
+      { "id": "d", "text": "dashboard" }
+    ],
+    "correct": ["b"],
+    "explanation": "CoreDNS (or historically kube-dns) answers cluster DNS queries such as my-svc.my-namespace.svc.cluster.local."
+  },
+  {
+    "id": "cka-016",
+    "cert": "cka",
+    "domain": "Workloads",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A Job should process a batch of work exactly once and then finish. Which restartPolicy is valid for a Job Pod?",
+    "options": [
+      { "id": "a", "text": "Always" },
+      { "id": "b", "text": "OnFailure or Never" },
+      { "id": "c", "text": "UnlessStopped" },
+      { "id": "d", "text": "OnDemand" }
+    ],
+    "correct": ["b"],
+    "explanation": "Jobs require restartPolicy of OnFailure or Never. Always is used by long-running controllers like Deployments."
+  },
+  {
+    "id": "cka-017",
+    "cert": "cka",
+    "domain": "Troubleshooting",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "Nodes show Ready, but new Pods cannot pull images and docker/containerd logs mention TLS certificate errors to the private registry. Where should you look first as a cluster operator?",
+    "options": [
+      { "id": "a", "text": "Node container runtime / registry mirror and CA trust configuration" },
+      { "id": "b", "text": "etcd compaction settings" },
+      { "id": "c", "text": "Ingress path rewriting" },
+      { "id": "d", "text": "HorizontalPodAutoscaler CPU target" }
+    ],
+    "correct": ["a"],
+    "explanation": "Image pulls are performed by the node runtime. Certificate trust and registry endpoint configuration on the nodes are the usual fix for TLS failures to private registries."
+  },
+  {
+    "id": "cka-018",
+    "cert": "cka",
+    "domain": "Security",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A RoleBinding grants permissions within a namespace. Which object grants similar permissions cluster-wide?",
+    "options": [
+      { "id": "a", "text": "ClusterRoleBinding" },
+      { "id": "b", "text": "ServiceAccountToken" },
+      { "id": "c", "text": "NetworkPolicy" },
+      { "id": "d", "text": "ValidatingWebhookConfiguration" }
+    ],
+    "correct": ["a"],
+    "explanation": "ClusterRoleBinding associates subjects with a ClusterRole (or Role via reference patterns) across the cluster, unlike namespaced RoleBindings."
+  },
+  {
+    "id": "cka-019",
+    "cert": "cka",
+    "domain": "Cluster Architecture",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which component runs on every node and ensures containers described in PodSpecs are running and healthy?",
+    "options": [
+      { "id": "a", "text": "kube-scheduler" },
+      { "id": "b", "text": "kubelet" },
+      { "id": "c", "text": "kube-controller-manager" },
+      { "id": "d", "text": "coredns" }
+    ],
+    "correct": ["b"],
+    "explanation": "The kubelet is the node agent that talks to the API server, starts containers via the runtime, and reports node/Pod status."
+  },
+  {
+    "id": "cka-020",
+    "cert": "cka",
+    "domain": "Workloads",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "You need one Pod copy on every node, including nodes that join later—for example a log agent. Which workload fits?",
+    "options": [
+      { "id": "a", "text": "DaemonSet" },
+      { "id": "b", "text": "CronJob" },
+      { "id": "c", "text": "ReplicaSet with replicas equal to current node count" },
+      { "id": "d", "text": "Job with parallelism equal to node count" }
+    ],
+    "correct": ["a"],
+    "explanation": "DaemonSets ensure a Pod on each (selected) node and add Pods automatically when nodes are added."
+  },
+  {
+    "id": "cka-021",
+    "cert": "cka",
+    "domain": "Networking",
+    "difficulty": "hard",
+    "type": "multiple",
+    "prompt": "Which statements about Kubernetes Services are correct? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "A headless Service (clusterIP: None) can return Pod IPs via DNS for stateful discovery" },
+      { "id": "b", "text": "kube-proxy or an equivalent dataplane programs packet forwarding to Endpoints/EndpointSlices" },
+      { "id": "c", "text": "ClusterIP Services are always reachable from the public internet without further setup" },
+      { "id": "d", "text": "ExternalName Services return a CNAME to an external DNS name" }
+    ],
+    "correct": ["a", "b", "d"],
+    "explanation": "ClusterIP is internal-only unless you add Ingress, NodePort, LoadBalancer, or similar. Headless, kube-proxy/dataplane, and ExternalName behave as described."
+  },
+  {
+    "id": "cka-022",
+    "cert": "cka",
+    "domain": "Storage",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A PersistentVolumeClaim is stuck Pending. The StorageClass uses a provisioner, but no volume appears. What should you verify?",
+    "options": [
+      { "id": "a", "text": "That the CSI/provisioner controller is healthy and can create volumes in the cloud or storage system" },
+      { "id": "b", "text": "That kubectl proxy is running on your laptop" },
+      { "id": "c", "text": "That all Deployments use hostNetwork: true" },
+      { "id": "d", "text": "That etcd listens on 0.0.0.0 without authentication" }
+    ],
+    "correct": ["a"],
+    "explanation": "Dynamic provisioning depends on a working CSI/external provisioner and valid StorageClass parameters. Laptop kubectl proxy and hostNetwork are unrelated."
+  },
+  {
+    "id": "cka-023",
+    "cert": "cka",
+    "domain": "Troubleshooting",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which kubectl command shows whether you can create Pods in namespace apps as your current credentials?",
+    "options": [
+      { "id": "a", "text": "kubectl auth can-i create pods -n apps" },
+      { "id": "b", "text": "kubectl top pods -n apps" },
+      { "id": "c", "text": "kubectl explain pods" },
+      { "id": "d", "text": "kubectl cluster-info dump" }
+    ],
+    "correct": ["a"],
+    "explanation": "kubectl auth can-i evaluates RBAC for a verb/resource/namespace combination for the current user or impersonated identity."
+  },
+  {
+    "id": "cka-024",
+    "cert": "cka",
+    "domain": "Security",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "You must restrict which registries Pods may pull from in a namespace. Which approach aligns with common CKA-level controls?",
+    "options": [
+      { "id": "a", "text": "Admission policy / OPA Gatekeeper / Kyverno-style policies validating image references" },
+      { "id": "b", "text": "Increasing the Deployment replicas" },
+      { "id": "c", "text": "Setting service.spec.sessionAffinity" },
+      { "id": "d", "text": "Lowering the Pod priorityClassName" }
+    ],
+    "correct": ["a"],
+    "explanation": "Admission controllers and policy engines can deny Pods whose images are not from approved registries. Scaling and session affinity do not enforce image provenance."
+  },
+  {
+    "id": "cka-025",
+    "cert": "cka",
+    "domain": "Workloads",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "ConfigMaps can be consumed by Pods as environment variables or mounted files. Which change requires a container restart to pick up by default when using envFrom?",
+    "options": [
+      { "id": "a", "text": "Updating the ConfigMap data used via envFrom" },
+      { "id": "b", "text": "Updating a projected volume file that the app re-reads from disk" },
+      { "id": "c", "text": "Changing an annotation on an unrelated Service" },
+      { "id": "d", "text": "Listing nodes with kubectl get nodes" }
+    ],
+    "correct": ["a"],
+    "explanation": "Environment variables are fixed at process start. Mounted ConfigMap files can update in place (with delay), but envFrom values do not reload without a restart."
+  },
+  {
+    "id": "cka-026",
+    "cert": "cka",
+    "domain": "Cluster Architecture",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "What is the role of the cloud-controller-manager in many clusters?",
+    "options": [
+      { "id": "a", "text": "It runs application containers inside etcd" },
+      { "id": "b", "text": "It integrates Kubernetes with the cloud provider for load balancers, nodes, and routes" },
+      { "id": "c", "text": "It replaces kubelet on Windows nodes only" },
+      { "id": "d", "text": "It stores Secrets exclusively outside etcd" }
+    ],
+    "correct": ["b"],
+    "explanation": "cloud-controller-manager implements cloud-specific control loops (nodes, routes, service load balancers) separate from generic controllers."
+  },
+  {
+    "id": "cka-027",
+    "cert": "cka",
+    "domain": "Networking",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "An Ingress resource defines HTTP routing rules. What else is required for those rules to take effect?",
+    "options": [
+      { "id": "a", "text": "An Ingress controller implementation running in the cluster" },
+      { "id": "b", "text": "A DaemonSet named kube-proxy disabled" },
+      { "id": "c", "text": "Every Pod using hostPort 80" },
+      { "id": "d", "text": "Disabling CoreDNS" }
+    ],
+    "correct": ["a"],
+    "explanation": "Ingress is declarative; a controller (NGINX, Traefik, cloud LB ingress, etc.) watches Ingress objects and configures the actual proxy/load balancer."
+  },
+  {
+    "id": "cka-028",
+    "cert": "cka",
+    "domain": "Troubleshooting",
+    "difficulty": "medium",
+    "type": "multiple",
+    "prompt": "A Pod is in ImagePullBackOff. Which checks are useful? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Verify the image name and tag exist in the registry" },
+      { "id": "b", "text": "Confirm imagePullSecrets if the registry is private" },
+      { "id": "c", "text": "Check node outbound network / DNS to the registry" },
+      { "id": "d", "text": "Increase etcd snapshot interval" }
+    ],
+    "correct": ["a", "b", "c"],
+    "explanation": "Wrong image references, missing pull credentials, and network/DNS issues commonly cause ImagePullBackOff. etcd snapshot timing does not affect pulls."
+  },
+  {
+    "id": "cka-029",
+    "cert": "cka",
+    "domain": "Storage",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "You need multiple Pods to read/write the same volume concurrently, and your storage backend supports it. Which accessMode should the PVC request?",
+    "options": [
+      { "id": "a", "text": "ReadWriteOnce" },
+      { "id": "b", "text": "ReadOnlyMany" },
+      { "id": "c", "text": "ReadWriteMany" },
+      { "id": "d", "text": "ReadWriteOncePod only, always" }
+    ],
+    "correct": ["c"],
+    "explanation": "ReadWriteMany (RWX) allows multiple nodes/Pods to mount the volume read-write when the provisioner supports it. RWO is single-node write; ROX is multi-node read-only."
+  },
+  {
+    "id": "cka-030",
+    "cert": "cka",
+    "domain": "Workloads",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "During a kubectl drain of a node, Pods managed by a Deployment are evicted. What typically recreates them elsewhere?",
+    "options": [
+      { "id": "a", "text": "The Deployment / ReplicaSet controller" },
+      { "id": "b", "text": "The etcd leader election algorithm alone" },
+      { "id": "c", "text": "CoreDNS stub domains" },
+      { "id": "d", "text": "The metrics-server scraper" }
+    ],
+    "correct": ["a"],
+    "explanation": "Drain evicts Pods; controllers that own those Pods (Deployment → ReplicaSet) create replacements on remaining schedulable nodes, subject to PDBs."
+  }
+]

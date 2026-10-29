@@ -1,0 +1,482 @@
+[
+  {
+    "id": "sec-001",
+    "cert": "securityplus",
+    "domain": "Threats",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "An attacker sends emails that impersonate a bank to trick users into entering passwords on a fake site. What is this called?",
+    "options": [
+      { "id": "a", "text": "Phishing" },
+      { "id": "b", "text": "War driving" },
+      { "id": "c", "text": "Bluejacking" },
+      { "id": "d", "text": "Tailgating" }
+    ],
+    "correct": ["a"],
+    "explanation": "Phishing uses deceptive messages to harvest credentials or deliver malware. Tailgating is physical; war driving surveys Wi-Fi; bluejacking relates to Bluetooth messaging."
+  },
+  {
+    "id": "sec-002",
+    "cert": "securityplus",
+    "domain": "Architecture",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which security control type is a locked server room door?",
+    "options": [
+      { "id": "a", "text": "Physical" },
+      { "id": "b", "text": "Logical encryption only" },
+      { "id": "c", "text": "Detective honeypot exclusively" },
+      { "id": "d", "text": "Compensating hash function" }
+    ],
+    "correct": ["a"],
+    "explanation": "Locks, guards, and badges are physical controls. Encryption and honeypots are technical/logical controls with different purposes."
+  },
+  {
+    "id": "sec-003",
+    "cert": "securityplus",
+    "domain": "Identity",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Multi-factor authentication typically combines factors from different categories. Which pairing is a valid MFA example?",
+    "options": [
+      { "id": "a", "text": "Password (something you know) + hardware token OTP (something you have)" },
+      { "id": "b", "text": "Password + PIN (both something you know only)" },
+      { "id": "c", "text": "Two different passwords typed twice" },
+      { "id": "d", "text": "Username + display name" }
+    ],
+    "correct": ["a"],
+    "explanation": "MFA requires at least two distinct factor types. Password+PIN is single-factor (knowledge). Usernames are identifiers, not authenticators."
+  },
+  {
+    "id": "sec-004",
+    "cert": "securityplus",
+    "domain": "Cryptography",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Which algorithm type uses the same key to encrypt and decrypt data?",
+    "options": [
+      { "id": "a", "text": "Symmetric encryption" },
+      { "id": "b", "text": "Asymmetric encryption" },
+      { "id": "c", "text": "Hashing" },
+      { "id": "d", "text": "Steganography" }
+    ],
+    "correct": ["a"],
+    "explanation": "Symmetric ciphers (AES, etc.) share one secret key. Asymmetric uses key pairs; hashing is one-way; steganography hides data."
+  },
+  {
+    "id": "sec-005",
+    "cert": "securityplus",
+    "domain": "Cryptography",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "What property does a cryptographic hash provide when used to verify a downloaded file's integrity?",
+    "options": [
+      { "id": "a", "text": "Detection of changes to the file contents" },
+      { "id": "b", "text": "Confidentiality of the file at rest without encryption" },
+      { "id": "c", "text": "Automatic malware removal" },
+      { "id": "d", "text": "Guaranteed non-repudiation without signatures" }
+    ],
+    "correct": ["a"],
+    "explanation": "Comparing hashes reveals whether bits changed. Hashing alone does not encrypt, clean malware, or prove who authored the file."
+  },
+  {
+    "id": "sec-006",
+    "cert": "securityplus",
+    "domain": "Network Security",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A firewall rule that allows outbound HTTPS but blocks inbound connections initiated from the internet is an example of:",
+    "options": [
+      { "id": "a", "text": "Default-deny inbound with controlled egress" },
+      { "id": "b", "text": "Mandatory VLAN hopping" },
+      { "id": "c", "text": "DNS tunneling" },
+      { "id": "d", "text": "ARP spoofing" }
+    ],
+    "correct": ["a"],
+    "explanation": "Allowing necessary outbound traffic while denying unsolicited inbound is a common least-privilege firewall posture."
+  },
+  {
+    "id": "sec-007",
+    "cert": "securityplus",
+    "domain": "Threats",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Ransomware that encrypts files and demands payment is primarily which type of malware outcome?",
+    "options": [
+      { "id": "a", "text": "Availability and integrity impact against the victim's data" },
+      { "id": "b", "text": "A solely physical control failure" },
+      { "id": "c", "text": "A beneficial patch management system" },
+      { "id": "d", "text": "A form of certificate pinning" }
+    ],
+    "correct": ["a"],
+    "explanation": "Encryption without the victim's key damages availability (and integrity of usable plaintext). Paying does not guarantee recovery and is not a security control."
+  },
+  {
+    "id": "sec-008",
+    "cert": "securityplus",
+    "domain": "Identity",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "The principle of least privilege means:",
+    "options": [
+      { "id": "a", "text": "Users and systems get only the access needed to perform their tasks" },
+      { "id": "b", "text": "Everyone receives domain admin by default" },
+      { "id": "c", "text": "Passwords must never expire even if compromised" },
+      { "id": "d", "text": "Encryption is optional for regulated data" }
+    ],
+    "correct": ["a"],
+    "explanation": "Least privilege limits blast radius when accounts are abused or mistakes occur."
+  },
+  {
+    "id": "sec-009",
+    "cert": "securityplus",
+    "domain": "Architecture",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Placing a public web server in a screened subnet separated from the internal LAN is commonly called using a:",
+    "options": [
+      { "id": "a", "text": "DMZ (demilitarized zone)" },
+      { "id": "b", "text": "Air-gapped HSM rack for all web traffic" },
+      { "id": "c", "text": "Cold site exclusively" },
+      { "id": "d", "text": "Jump box for end-user browsing" }
+    ],
+    "correct": ["a"],
+    "explanation": "A DMZ hosts internet-facing services with controlled paths to internal networks, reducing direct exposure of the LAN."
+  },
+  {
+    "id": "sec-010",
+    "cert": "securityplus",
+    "domain": "Operations",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Which backup strategy stores a full backup weekly and only changed data daily?",
+    "options": [
+      { "id": "a", "text": "Full + incremental (or differential) schedule" },
+      { "id": "b", "text": "RAID 0 striping alone" },
+      { "id": "c", "text": "Screenshot-only DR" },
+      { "id": "d", "text": "Memory-only live migration" }
+    ],
+    "correct": ["a"],
+    "explanation": "Incremental/differential backups reduce daily storage and time while relying on periodic full backups for restore chains. RAID is not a backup."
+  },
+  {
+    "id": "sec-011",
+    "cert": "securityplus",
+    "domain": "Threats",
+    "difficulty": "hard",
+    "type": "multiple",
+    "prompt": "Which are examples of social engineering? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Vishing (voice phishing) calls requesting MFA codes" },
+      { "id": "b", "text": "Tailgating through a secure door behind an employee" },
+      { "id": "c", "text": "SQL injection against a login form" },
+      { "id": "d", "text": "Pretexting as IT support to reset a password" }
+    ],
+    "correct": ["a", "b", "d"],
+    "explanation": "Social engineering manipulates people. SQL injection is a technical application attack, not social engineering."
+  },
+  {
+    "id": "sec-012",
+    "cert": "securityplus",
+    "domain": "Network Security",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "HTTPS protects web traffic primarily by providing:",
+    "options": [
+      { "id": "a", "text": "Confidentiality and integrity via TLS" },
+      { "id": "b", "text": "Mandatory content filtering of all HTML" },
+      { "id": "c", "text": "Physical destruction of disks" },
+      { "id": "d", "text": "Automatic secure coding of the application logic" }
+    ],
+    "correct": ["a"],
+    "explanation": "TLS encrypts and authenticates the channel (with certificates). It does not fix insecure app code or replace physical media controls."
+  },
+  {
+    "id": "sec-013",
+    "cert": "securityplus",
+    "domain": "Identity",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Federation in identity systems most nearly means:",
+    "options": [
+      { "id": "a", "text": "Trusting authentication assertions from an external identity provider" },
+      { "id": "b", "text": "Hashing passwords with a faster unsalted algorithm" },
+      { "id": "c", "text": "Disabling MFA for privileged users" },
+      { "id": "d", "text": "Storing all passwords in a shared spreadsheet" }
+    ],
+    "correct": ["a"],
+    "explanation": "Federation (SAML, OIDC, etc.) lets apps accept tokens/assertions from an IdP they trust instead of managing every password locally."
+  },
+  {
+    "id": "sec-014",
+    "cert": "securityplus",
+    "domain": "Cryptography",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "Digital signatures primarily provide which security properties?",
+    "options": [
+      { "id": "a", "text": "Integrity and non-repudiation (authenticity of the signer)" },
+      { "id": "b", "text": "Availability of network bandwidth" },
+      { "id": "c", "text": "Physical facility access" },
+      { "id": "d", "text": "Automatic privilege escalation" }
+    ],
+    "correct": ["a"],
+    "explanation": "A valid signature shows the data was not altered and was signed by the holder of the private key—supporting non-repudiation when keys are properly managed."
+  },
+  {
+    "id": "sec-015",
+    "cert": "securityplus",
+    "domain": "Operations",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A SIEM platform is mainly used to:",
+    "options": [
+      { "id": "a", "text": "Aggregate and correlate security logs/alerts for detection and investigation" },
+      { "id": "b", "text": "Replace all endpoint antivirus engines" },
+      { "id": "c", "text": "Issue TLS certificates to the public" },
+      { "id": "d", "text": "Perform disk shredding" }
+    ],
+    "correct": ["a"],
+    "explanation": "Security Information and Event Management centralises log analysis. It complements—not replaces—endpoint and PKI controls."
+  },
+  {
+    "id": "sec-016",
+    "cert": "securityplus",
+    "domain": "Architecture",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Zero Trust networking emphasises:",
+    "options": [
+      { "id": "a", "text": "Never trust by network location alone; continuously verify identity and device posture" },
+      { "id": "b", "text": "Trust all traffic inside the corporate IP range without checks" },
+      { "id": "c", "text": "Disable logging to improve performance" },
+      { "id": "d", "text": "Share one admin password across teams" }
+    ],
+    "correct": ["a"],
+    "explanation": "Zero Trust assumes breach and requires strong identity, device health, and least-privilege access regardless of perimeter."
+  },
+  {
+    "id": "sec-017",
+    "cert": "securityplus",
+    "domain": "Threats",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Malware that spreads by inserting copies of itself into other programs or boot sectors is classically called a:",
+    "options": [
+      { "id": "a", "text": "Virus" },
+      { "id": "b", "text": "Logic Faraday cage" },
+      { "id": "c", "text": "Hardware HSM" },
+      { "id": "d", "text": "Warm site" }
+    ],
+    "correct": ["a"],
+    "explanation": "Viruses need a host file/boot record to propagate. Worms self-propagate over networks; the other options are not malware types."
+  },
+  {
+    "id": "sec-018",
+    "cert": "securityplus",
+    "domain": "Network Security",
+    "difficulty": "hard",
+    "type": "multiple",
+    "prompt": "Which controls help protect a wireless LAN? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "WPA3 (or strong WPA2-Enterprise) instead of open/WEP" },
+      { "id": "b", "text": "Disabling SSID broadcast as the only defence" },
+      { "id": "c", "text": "Using a guest network isolated from corporate resources" },
+      { "id": "d", "text": "Rotating PSKs / using 802.1X with unique credentials" }
+    ],
+    "correct": ["a", "c", "d"],
+    "explanation": "Strong encryption and isolation matter. Hiding the SSID is weak obscurity and insufficient alone; WEP/open networks are unsafe."
+  },
+  {
+    "id": "sec-019",
+    "cert": "securityplus",
+    "domain": "Operations",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Applying vendor security updates to close known vulnerabilities is called:",
+    "options": [
+      { "id": "a", "text": "Patch management" },
+      { "id": "b", "text": "Rainbow table generation" },
+      { "id": "c", "text": "Port mirroring" },
+      { "id": "d", "text": "Banner grabbing" }
+    ],
+    "correct": ["a"],
+    "explanation": "Patch management systematically deploys fixes. The other terms relate to attacks or network troubleshooting techniques."
+  },
+  {
+    "id": "sec-020",
+    "cert": "securityplus",
+    "domain": "Identity",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "Just-in-time (JIT) privileged access is intended to:",
+    "options": [
+      { "id": "a", "text": "Grant elevated rights only for a limited time when needed" },
+      { "id": "b", "text": "Give permanent global admin to all developers" },
+      { "id": "c", "text": "Remove all authentication from APIs" },
+      { "id": "d", "text": "Disable audit logs for admins" }
+    ],
+    "correct": ["a"],
+    "explanation": "JIT reduces standing privilege, shrinking the window attackers can abuse high-privilege accounts."
+  },
+  {
+    "id": "sec-021",
+    "cert": "securityplus",
+    "domain": "Cryptography",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Why is salting password hashes important?",
+    "options": [
+      { "id": "a", "text": "It ensures identical passwords produce different hashes and slows precomputed attacks" },
+      { "id": "b", "text": "It encrypts network packets in transit" },
+      { "id": "c", "text": "It replaces the need for TLS" },
+      { "id": "d", "text": "It grants MFA automatically" }
+    ],
+    "correct": ["a"],
+    "explanation": "Unique salts defeat rainbow tables and force attackers to hash per-user guesses rather than reuse one table for all users."
+  },
+  {
+    "id": "sec-022",
+    "cert": "securityplus",
+    "domain": "Architecture",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "An air-gapped system is one that:",
+    "options": [
+      { "id": "a", "text": "Has no network connectivity to untrusted networks by design" },
+      { "id": "b", "text": "Uses only wireless bridges" },
+      { "id": "c", "text": "Is always exposed on the public internet" },
+      { "id": "d", "text": "Stores passwords in cleartext" }
+    ],
+    "correct": ["a"],
+    "explanation": "Air gaps isolate sensitive systems from external networks, though removable media and side channels remain risks."
+  },
+  {
+    "id": "sec-023",
+    "cert": "securityplus",
+    "domain": "Operations",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "In incident response, containment focuses on:",
+    "options": [
+      { "id": "a", "text": "Limiting the blast radius of an active incident" },
+      { "id": "b", "text": "Writing the final lessons-learned report only" },
+      { "id": "c", "text": "Purchasing new office furniture" },
+      { "id": "d", "text": "Ignoring indicators of compromise" }
+    ],
+    "correct": ["a"],
+    "explanation": "After detection, containment stops spread (isolate hosts, revoke tokens) before eradication and recovery."
+  },
+  {
+    "id": "sec-024",
+    "cert": "securityplus",
+    "domain": "Threats",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A supply-chain attack often compromises victims by:",
+    "options": [
+      { "id": "a", "text": "Subverting trusted software vendors, updates, or dependencies" },
+      { "id": "b", "text": "Locking a single unused conference room" },
+      { "id": "c", "text": "Increasing font size on a website" },
+      { "id": "d", "text": "Enabling disk encryption for the first time" }
+    ],
+    "correct": ["a"],
+    "explanation": "Attackers abuse trust in publishers or libraries so malicious code rides legitimate distribution channels."
+  },
+  {
+    "id": "sec-025",
+    "cert": "securityplus",
+    "domain": "Network Security",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Network segmentation helps security mainly by:",
+    "options": [
+      { "id": "a", "text": "Restricting lateral movement between groups of systems" },
+      { "id": "b", "text": "Guaranteeing zero vulnerabilities in software" },
+      { "id": "c", "text": "Removing the need for authentication" },
+      { "id": "d", "text": "Making backups unnecessary" }
+    ],
+    "correct": ["a"],
+    "explanation": "Segments and micro-perimeters limit how far an attacker can move after compromising one host."
+  },
+  {
+    "id": "sec-026",
+    "cert": "securityplus",
+    "domain": "Identity",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Something you are, in authentication terms, refers to:",
+    "options": [
+      { "id": "a", "text": "Biometrics such as fingerprint or facial recognition" },
+      { "id": "b", "text": "A password written on paper" },
+      { "id": "c", "text": "A smart card alone without biometrics" },
+      { "id": "d", "text": "A building address" }
+    ],
+    "correct": ["a"],
+    "explanation": "Biometric factors are \"something you are.\" Passwords are knowledge; smart cards are possession."
+  },
+  {
+    "id": "sec-027",
+    "cert": "securityplus",
+    "domain": "Operations",
+    "difficulty": "hard",
+    "type": "multiple",
+    "prompt": "Which practices strengthen organisational security awareness? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Regular phishing simulations with remedial training" },
+      { "id": "b", "text": "Clear reporting paths for suspicious messages" },
+      { "id": "c", "text": "Punishing reporters of phish so harshly nobody reports" },
+      { "id": "d", "text": "Role-based training for high-risk functions (finance, admins)" }
+    ],
+    "correct": ["a", "b", "d"],
+    "explanation": "Positive reporting culture and targeted training improve outcomes. Fear-based punishment drives incidents underground."
+  },
+  {
+    "id": "sec-028",
+    "cert": "securityplus",
+    "domain": "Cryptography",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Perfect forward secrecy (PFS) in TLS means:",
+    "options": [
+      { "id": "a", "text": "Compromise of a long-term server key does not decrypt past sessions that used ephemeral keys" },
+      { "id": "b", "text": "Passwords never need rotation" },
+      { "id": "c", "text": "All ciphertext is publicly readable" },
+      { "id": "d", "text": "Certificates never expire" }
+    ],
+    "correct": ["a"],
+    "explanation": "Ephemeral key exchanges (e.g., ECDHE) produce session keys not recoverable from the server's stored private key alone."
+  },
+  {
+    "id": "sec-029",
+    "cert": "securityplus",
+    "domain": "Architecture",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "A hot site for disaster recovery is characterised by:",
+    "options": [
+      { "id": "a", "text": "Nearly ready infrastructure and data that can fail over quickly" },
+      { "id": "b", "text": "An empty building with no equipment" },
+      { "id": "c", "text": "No connectivity and no power planning" },
+      { "id": "d", "text": "Only paper copies of policies" }
+    ],
+    "correct": ["a"],
+    "explanation": "Hot sites are expensive but minimise RTO with synchronised or frequently updated systems. Cold sites are facilities with little pre-provisioned gear."
+  },
+  {
+    "id": "sec-030",
+    "cert": "securityplus",
+    "domain": "Threats",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Credential stuffing attacks rely on:",
+    "options": [
+      { "id": "a", "text": "Reusing username/password pairs leaked from other breaches" },
+      { "id": "b", "text": "Physically stealing backup tapes from a vault" },
+      { "id": "c", "text": "Exploiting a CPU speculative-execution bug only" },
+      { "id": "d", "text": "Misconfigured printer baud rates" }
+    ],
+    "correct": ["a"],
+    "explanation": "Attackers automate login attempts with known credential dumps. Unique passwords and MFA blunt this technique."
+  }
+]
