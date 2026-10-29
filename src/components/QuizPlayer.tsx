@@ -2,27 +2,50 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import type { CertId, Question, QuizResult } from "@/lib/types";
+import type { CertId, Question, QuizMode, QuizResult } from "@/lib/types";
 import { CERTS } from "@/lib/certs";
 import { dateKey } from "@/lib/date";
-import { buildDailyQuiz, isAnswerCorrect } from "@/lib/questions";
+import {
+  buildDailyQuiz,
+  buildPracticeQuiz,
+  isAnswerCorrect,
+} from "@/lib/questions";
 import { hasCompletedToday } from "@/lib/storage";
+import {
+  canStartPractice,
+  practiceRemaining,
+  practiceUsedToday,
+} from "@/lib/freemium";
 import { useProgress } from "@/hooks/useProgress";
 
-type Phase = "intro" | "question" | "feedback" | "summary";
+type Phase = "intro" | "question" | "feedback" | "summary" | "locked";
 
-export function QuizPlayer({ cert }: { cert: CertId }) {
+export function QuizPlayer({
+  cert,
+  mode = "daily",
+}: {
+  cert: CertId;
+  mode?: QuizMode;
+}) {
   const { progress, ready, recordQuiz } = useProgress();
   const meta = CERTS[cert];
 
   const questions = useMemo(() => {
     if (!progress) return [] as Question[];
+    if (mode === "practice") {
+      return buildPracticeQuiz(
+        cert,
+        dateKey(),
+        practiceUsedToday(progress),
+        progress.certs[cert].seenQuestionIds,
+      );
+    }
     return buildDailyQuiz(
       cert,
       dateKey(),
       progress.certs[cert].seenQuestionIds,
     );
-  }, [cert, progress]);
+  }, [cert, mode, progress]);
 
   const [phase, setPhase] = useState<Phase>("intro");
   const [index, setIndex] = useState(0);
@@ -36,7 +59,10 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
     );
   }
 
-  const alreadyDone = hasCompletedToday(progress, cert);
+  const state = progress;
+  const alreadyDone = hasCompletedToday(state, cert);
+  const remainingPractice = practiceRemaining(state);
+  const practiceAllowed = mode !== "practice" || canStartPractice(state);
   const current = questions[index];
   const correctCount = answers.filter((a) => a.correct).length;
 
@@ -73,6 +99,7 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
       const finalResult: QuizResult = {
         cert,
         dateKey: dateKey(),
+        mode,
         total: questions.length,
         correctCount: finalCorrect,
         answers,
@@ -88,10 +115,41 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
   }
 
   function startQuiz() {
+    if (mode === "practice" && !canStartPractice(state)) {
+      setPhase("locked");
+      return;
+    }
     setPhase("question");
     setIndex(0);
     setSelected([]);
     setAnswers([]);
+  }
+
+  if (phase === "locked" || (phase === "intro" && mode === "practice" && !practiceAllowed)) {
+    return (
+      <section className="animate-pop-in rounded-2xl border border-amber-400/30 bg-amber-500/10 p-6">
+        <h2 className="text-xl font-semibold text-amber-100">Practice limit reached</h2>
+        <p className="mt-2 text-sm text-[var(--text-muted)]">
+          Free tier includes {questions.length ? "1 extra practice set" : "limited practice"} per
+          day. Your daily quiz for each cert stays free forever. Unlock Pro for unlimited
+          practice drills.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <Link
+            href="/pro"
+            className="rounded-xl bg-amber-400 px-5 py-2.5 text-sm font-semibold text-slate-900 hover:bg-amber-300"
+          >
+            See Pro
+          </Link>
+          <Link
+            href={`/quiz/${cert}`}
+            className="rounded-xl border border-white/15 px-5 py-2.5 text-sm text-[var(--text-muted)] hover:border-white/30"
+          >
+            Back to daily quiz
+          </Link>
+        </div>
+      </section>
+    );
   }
 
   if (phase === "intro") {
@@ -101,16 +159,24 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
           {meta.provider}
         </p>
         <h2 className="mt-1 text-2xl font-semibold" style={{ color: meta.color }}>
-          {meta.shortName} daily quiz
+          {meta.shortName} {mode === "practice" ? "practice" : "daily quiz"}
         </h2>
         <p className="mt-3 text-sm text-[var(--text-muted)]">
-          {questions.length} questions · original practice items · instant feedback with
-          explanations. Completing any cert quiz today advances your streak.
+          {questions.length} questions · original items · instant explanations.
+          {mode === "daily"
+            ? " Completing a daily quiz advances your streak (once per day)."
+            : " Extra practice does not replace your daily set."}
         </p>
-        {alreadyDone ? (
+        {mode === "daily" && alreadyDone ? (
           <p className="mt-4 rounded-xl bg-emerald-500/10 px-3 py-2 text-sm text-emerald-300">
-            You already completed today&apos;s {meta.shortName} quiz. You can still
-            practice again; streak only counts once per day.
+            Today&apos;s daily {meta.shortName} quiz is done. Retry the same set, or start extra
+            practice.
+          </p>
+        ) : null}
+        {mode === "practice" ? (
+          <p className="mt-4 text-xs text-[var(--text-muted)]">
+            Free practice remaining today:{" "}
+            {Number.isFinite(remainingPractice) ? remainingPractice : "Unlimited (Pro)"}
           </p>
         ) : null}
         <div className="mt-6 flex flex-wrap gap-3">
@@ -119,13 +185,32 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
             onClick={startQuiz}
             className="rounded-xl bg-sky-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-sky-400"
           >
-            {alreadyDone ? "Practice again" : "Start daily quiz"}
+            {mode === "practice"
+              ? "Start practice"
+              : alreadyDone
+                ? "Retry daily set"
+                : "Start daily quiz"}
           </button>
+          {mode === "daily" ? (
+            <Link
+              href={`/quiz/${cert}?mode=practice`}
+              className="rounded-xl border border-white/15 px-5 py-2.5 text-sm text-[var(--text-muted)] hover:border-white/30 hover:text-[var(--text-primary)]"
+            >
+              Extra practice
+            </Link>
+          ) : (
+            <Link
+              href={`/quiz/${cert}`}
+              className="rounded-xl border border-white/15 px-5 py-2.5 text-sm text-[var(--text-muted)] hover:border-white/30"
+            >
+              Daily quiz
+            </Link>
+          )}
           <Link
             href="/"
-            className="rounded-xl border border-white/15 px-5 py-2.5 text-sm text-[var(--text-muted)] hover:border-white/30 hover:text-[var(--text-primary)]"
+            className="rounded-xl border border-white/15 px-5 py-2.5 text-sm text-[var(--text-muted)] hover:border-white/30"
           >
-            Back home
+            Home
           </Link>
         </div>
       </section>
@@ -140,7 +225,7 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
       <section className="animate-pop-in rounded-2xl border border-white/10 bg-[var(--bg-panel)] p-6">
         <h2 className="text-2xl font-semibold">Quiz complete</h2>
         <p className="mt-2 text-sm text-[var(--text-muted)]">
-          {meta.shortName} · {correctCount}/{questions.length} correct ({pct}%)
+          {meta.shortName} · {mode} · {correctCount}/{questions.length} correct ({pct}%)
         </p>
         <div className="mt-6 h-3 overflow-hidden rounded-full bg-black/30">
           <div
@@ -159,11 +244,7 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
                 <span className="text-[var(--text-muted)]">
                   {i + 1}. {q.domain}
                 </span>
-                <span
-                  className={
-                    ans?.correct ? "text-emerald-300" : "text-rose-300"
-                  }
-                >
+                <span className={ans?.correct ? "text-emerald-300" : "text-rose-300"}>
                   {ans?.correct ? "Correct" : "Review"}
                 </span>
               </li>
@@ -172,18 +253,25 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
         </ul>
         <div className="mt-6 flex flex-wrap gap-3">
           <Link
-            href="/"
+            href="/stats"
             className="rounded-xl bg-sky-500 px-5 py-2.5 text-sm font-semibold text-white hover:bg-sky-400"
           >
-            Back to dashboard
+            View stats
           </Link>
-          <button
-            type="button"
-            onClick={startQuiz}
-            className="rounded-xl border border-white/15 px-5 py-2.5 text-sm text-[var(--text-muted)] hover:border-white/30 hover:text-[var(--text-primary)]"
+          <Link
+            href="/"
+            className="rounded-xl border border-white/15 px-5 py-2.5 text-sm text-[var(--text-muted)] hover:border-white/30"
           >
-            Retry set
-          </button>
+            Dashboard
+          </Link>
+          {mode === "daily" ? (
+            <Link
+              href={`/quiz/${cert}?mode=practice`}
+              className="rounded-xl border border-white/15 px-5 py-2.5 text-sm text-[var(--text-muted)] hover:border-white/30"
+            >
+              Extra practice
+            </Link>
+          ) : null}
         </div>
       </section>
     );
@@ -193,7 +281,9 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
     return <p className="text-sm text-rose-300">No questions available.</p>;
   }
 
-  const progressPct = Math.round(((index + (phase === "feedback" ? 1 : 0)) / questions.length) * 100);
+  const progressPct = Math.round(
+    ((index + (phase === "feedback" ? 1 : 0)) / questions.length) * 100,
+  );
 
   return (
     <section className="animate-pop-in">
@@ -201,7 +291,9 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
         <span>
           Question {index + 1} of {questions.length}
         </span>
-        <span>{current.domain} · {current.difficulty}</span>
+        <span>
+          {current.domain} · {current.difficulty}
+        </span>
       </div>
       <div className="mb-6 h-1.5 overflow-hidden rounded-full bg-black/30">
         <div
@@ -258,9 +350,7 @@ export function QuizPlayer({ cert }: { cert: CertId }) {
                 : "bg-rose-500/10 text-rose-200"
             }`}
           >
-            <p className="font-semibold">
-              {lastCorrect ? "Correct" : "Not quite"}
-            </p>
+            <p className="font-semibold">{lastCorrect ? "Correct" : "Not quite"}</p>
             <p className="mt-1 text-[var(--text-primary)]/90">{current.explanation}</p>
           </div>
         ) : null}

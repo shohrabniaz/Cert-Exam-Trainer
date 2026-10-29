@@ -1,9 +1,9 @@
-import type { CertId, ProgressState, QuizResult } from "./types";
+import type { CertId, ProgressState, QuizResult, UserSettings } from "./types";
 import { CERT_ORDER } from "./certs";
 import { dateKey, isSameDay, isYesterday } from "./date";
 
 const STORAGE_KEY = "cert-trainer:progress:v1";
-const CURRENT_VERSION = 2;
+const CURRENT_VERSION = 3;
 
 function emptyCertProgress() {
   return {
@@ -11,6 +11,14 @@ function emptyCertProgress() {
     totalCorrect: 0,
     seenQuestionIds: [] as string[],
     lastQuizDateKey: null as string | null,
+  };
+}
+
+function emptySettings(): UserSettings {
+  return {
+    onboardingDismissed: false,
+    proUnlocked: false,
+    practiceCompletionsByDate: {},
   };
 }
 
@@ -35,6 +43,7 @@ function emptyState(): ProgressState {
     },
     certs: emptyCerts(),
     history: [],
+    settings: emptySettings(),
   };
 }
 
@@ -59,11 +68,18 @@ function normalize(parsed: Partial<ProgressState>): ProgressState {
       ...(parsed.certs?.[id] ?? {}),
     };
   }
+  const history = Array.isArray(parsed.history)
+    ? parsed.history.map((h) => ({
+        ...h,
+        mode: h.mode ?? "daily",
+      }))
+    : [];
   return {
     version: CURRENT_VERSION,
     streak: { ...base.streak, ...(parsed.streak ?? {}) },
     certs,
-    history: Array.isArray(parsed.history) ? parsed.history : [],
+    history,
+    settings: { ...base.settings, ...(parsed.settings ?? {}) },
   };
 }
 
@@ -82,11 +98,29 @@ export function resetProgress(): ProgressState {
   return fresh;
 }
 
-/**
- * Recompute the streak against today. If the user has not been active today or
- * yesterday, the current streak resets to zero. This keeps the dashboard honest
- * even when the app is opened days later.
- */
+export function updateSettings(
+  state: ProgressState,
+  patch: Partial<UserSettings>,
+): ProgressState {
+  const next = {
+    ...state,
+    settings: { ...state.settings, ...patch },
+  };
+  saveProgress(next);
+  return next;
+}
+
+export function exportProgressJson(state: ProgressState): string {
+  return JSON.stringify(state, null, 2);
+}
+
+export function importProgressJson(raw: string): ProgressState {
+  const parsed = JSON.parse(raw) as Partial<ProgressState>;
+  const next = normalize(parsed);
+  saveProgress(next);
+  return next;
+}
+
 export function refreshStreak(
   state: ProgressState,
   today = dateKey(),
@@ -107,6 +141,7 @@ export function applyQuizResult(
 ): ProgressState {
   const today = result.dateKey;
   const cert = state.certs[result.cert];
+  const mode = result.mode ?? "daily";
 
   const newSeen = new Set(cert.seenQuestionIds);
   for (const ans of result.answers) newSeen.add(ans.questionId);
@@ -115,14 +150,28 @@ export function applyQuizResult(
     totalAnswered: cert.totalAnswered + result.total,
     totalCorrect: cert.totalCorrect + result.correctCount,
     seenQuestionIds: Array.from(newSeen),
-    lastQuizDateKey: today,
+    lastQuizDateKey:
+      mode === "daily" ? today : cert.lastQuizDateKey,
   };
 
   const streak = nextStreak(state, today);
 
+  let settings = state.settings;
+  if (mode === "practice") {
+    const count = (settings.practiceCompletionsByDate[today] ?? 0) + 1;
+    settings = {
+      ...settings,
+      practiceCompletionsByDate: {
+        ...settings.practiceCompletionsByDate,
+        [today]: count,
+      },
+    };
+  }
+
   return {
     ...state,
     streak,
+    settings,
     certs: { ...state.certs, [result.cert]: updatedCert },
     history: [result, ...state.history].slice(0, 200),
   };

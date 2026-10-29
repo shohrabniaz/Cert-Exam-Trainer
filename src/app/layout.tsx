@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
+import { AppNav } from "@/components/AppNav";
+import { ProgressProvider } from "@/hooks/ProgressProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -15,7 +17,10 @@ export const metadata: Metadata = {
     title: "Cert Trainer",
   },
   icons: {
-    icon: [{ url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+    ],
     apple: [{ url: "/icons/icon-192.png", sizes: "192x192" }],
   },
 };
@@ -35,10 +40,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="mx-auto min-h-screen max-w-3xl px-4 pb-16 pt-6 sm:px-6">
-          {children}
-        </div>
-        <ServiceWorkerRegister />
+        <ProgressProvider>
+          <div className="mx-auto min-h-screen max-w-3xl px-4 pb-16 pt-6 sm:px-6">
+            <AppNav />
+            {children}
+          </div>
+          <ServiceWorkerRegister />
+        </ProgressProvider>
       </body>
     </html>
   );

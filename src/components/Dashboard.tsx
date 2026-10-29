@@ -1,14 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import { CERT_ORDER, CERTS } from "@/lib/certs";
 import { hasCompletedToday } from "@/lib/storage";
+import { isPro, practiceRemaining } from "@/lib/freemium";
 import { useProgress } from "@/hooks/useProgress";
 import { Header } from "@/components/Header";
 import { StreakBadge } from "@/components/StreakBadge";
 import { CertCard } from "@/components/CertCard";
+import { OnboardingBanner } from "@/components/OnboardingBanner";
 
 export function Dashboard() {
-  const { progress, ready, clearAll } = useProgress();
+  const { progress, ready } = useProgress();
 
   if (!ready || !progress) {
     return (
@@ -17,13 +20,25 @@ export function Dashboard() {
   }
 
   const recent = progress.history.slice(0, 5);
+  const remaining = practiceRemaining(progress);
 
   return (
     <>
       <Header subtitle="Daily drills for top cloud exams — CKA, AWS SAA-C03, AWS Cloud Practitioner, AZ-104, and Security+. Progress stays in this browser." />
 
+      <OnboardingBanner />
+
       <section className="mb-8">
         <StreakBadge streak={progress.streak} />
+        <p className="mt-3 text-xs text-[var(--text-muted)]">
+          {isPro(progress)
+            ? "Pro unlocked · unlimited extra practice"
+            : `Free tier · ${Number.isFinite(remaining) ? remaining : 0} extra practice set(s) left today`}
+          {" · "}
+          <Link href="/pro" className="text-sky-300 hover:underline">
+            View Pro
+          </Link>
+        </p>
       </section>
 
       <section className="mb-10 space-y-4">
@@ -43,9 +58,14 @@ export function Dashboard() {
       </section>
 
       <section className="mb-10">
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-          Recent quizzes
-        </h2>
+        <div className="mb-3 flex items-center justify-between">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+            Recent quizzes
+          </h2>
+          <Link href="/stats" className="text-xs text-sky-300 hover:underline">
+            Full stats
+          </Link>
+        </div>
         {recent.length === 0 ? (
           <p className="rounded-2xl border border-dashed border-white/10 px-4 py-6 text-sm text-[var(--text-muted)]">
             No quizzes yet. Start with CKA or an AWS exam above.
@@ -58,7 +78,12 @@ export function Dashboard() {
                 className="flex items-center justify-between rounded-xl border border-white/10 bg-[var(--bg-panel)] px-4 py-3 text-sm"
               >
                 <div>
-                  <p className="font-medium">{CERTS[item.cert].shortName}</p>
+                  <p className="font-medium">
+                    {CERTS[item.cert].shortName}
+                    <span className="ml-2 text-xs font-normal text-[var(--text-muted)]">
+                      {item.mode ?? "daily"}
+                    </span>
+                  </p>
                   <p className="text-xs text-[var(--text-muted)]">{item.dateKey}</p>
                 </div>
                 <p className="text-[var(--text-muted)]">
@@ -68,27 +93,6 @@ export function Dashboard() {
             ))}
           </ul>
         )}
-      </section>
-
-      <section className="rounded-2xl border border-white/10 bg-[var(--bg-panel)] p-5">
-        <h2 className="text-sm font-semibold">Local data</h2>
-        <p className="mt-1 text-sm text-[var(--text-muted)]">
-          Streaks and stats live in browser localStorage (no account required in week 1).
-        </p>
-        <button
-          type="button"
-          onClick={() => {
-            if (
-              typeof window !== "undefined" &&
-              window.confirm("Reset all streaks, history, and cert progress on this device?")
-            ) {
-              clearAll();
-            }
-          }}
-          className="mt-4 rounded-xl border border-rose-400/30 px-4 py-2 text-sm text-rose-300 hover:bg-rose-500/10"
-        >
-          Reset progress
-        </button>
       </section>
 
       <footer className="mt-10 text-center text-xs text-[var(--text-muted)]">

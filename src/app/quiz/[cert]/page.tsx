@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CERTS, isCertId } from "@/lib/certs";
+import type { QuizMode } from "@/lib/types";
 import { QuizPlayer } from "@/components/QuizPlayer";
 
 export function generateStaticParams() {
@@ -13,9 +14,17 @@ export function generateStaticParams() {
   ];
 }
 
-export default function QuizPage({ params }: { params: { cert: string } }) {
+export default function QuizPage({
+  params,
+  searchParams,
+}: {
+  params: { cert: string };
+  searchParams?: { mode?: string };
+}) {
   if (!isCertId(params.cert)) notFound();
   const meta = CERTS[params.cert];
+  const mode: QuizMode =
+    searchParams?.mode === "practice" ? "practice" : "daily";
 
   return (
     <>
@@ -32,9 +41,11 @@ export default function QuizPage({ params }: { params: { cert: string } }) {
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">
           {meta.shortName}
         </h1>
-        <p className="mt-1 text-sm text-[var(--text-muted)]">{meta.name}</p>
+        <p className="mt-1 text-sm text-[var(--text-muted)]">
+          {meta.name} · {mode === "practice" ? "Extra practice" : "Daily quiz"}
+        </p>
       </div>
-      <QuizPlayer cert={params.cert} />
+      <QuizPlayer cert={params.cert} mode={mode} />
     </>
   );
 }
