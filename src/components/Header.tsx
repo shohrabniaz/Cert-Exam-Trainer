@@ -22,7 +22,7 @@ export function Header({
           Cert Exam Trainer
         </p>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight sm:text-3xl">
-          Daily cert practice
+          Train for top cert exams
         </h1>
         {subtitle ? (
           <p className="mt-2 max-w-xl text-sm text-[var(--text-muted)]">{subtitle}</p>

@@ -1,4 +1,9 @@
-export type CertId = "cka" | "az104" | "securityplus";
+export type CertId =
+  | "cka"
+  | "aws-saa"
+  | "aws-clf"
+  | "az104"
+  | "securityplus";
 
 export interface CertMeta {
   id: CertId;
@@ -7,6 +12,7 @@ export interface CertMeta {
   provider: string;
   tagline: string;
   color: string;
+  featured?: boolean;
 }
 
 export interface QuestionOption {

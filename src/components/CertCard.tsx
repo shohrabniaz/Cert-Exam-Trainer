@@ -25,9 +25,16 @@ export function CertCard({
     >
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-            {cert.provider}
-          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+              {cert.provider}
+            </p>
+            {cert.featured ? (
+              <span className="rounded-md bg-amber-400/15 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-amber-300">
+                Top exam
+              </span>
+            ) : null}
+          </div>
           <h2 className="mt-1 text-xl font-semibold" style={{ color: cert.color }}>
             {cert.shortName}
           </h2>

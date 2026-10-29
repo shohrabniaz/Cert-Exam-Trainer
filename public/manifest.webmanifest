@@ -1,7 +1,7 @@
 {
   "name": "Cert Exam Trainer",
   "short_name": "CertTrainer",
-  "description": "Daily practice for CKA, AZ-104 and Security+ with streaks.",
+  "description": "Daily practice for CKA, AWS SAA-C03, AWS Cloud Practitioner, AZ-104 and Security+ with streaks.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b1220",

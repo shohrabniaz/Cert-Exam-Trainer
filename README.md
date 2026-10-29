@@ -1,6 +1,16 @@
 # Cert Exam Trainer
 
-Duolingo-style daily practice for cloud and security certifications — **CKA**, **AZ-104**, and **Security+** — with streaks and simple progress stats.
+Duolingo-style daily practice for **top certification exams** — with streaks and simple progress stats.
+
+**Featured trainings**
+
+| Exam | Provider | Focus |
+| --- | --- | --- |
+| **CKA** | CNCF / Linux Foundation | Kubernetes administration |
+| **AWS SAA-C03** | Amazon Web Services | Solutions Architect Associate |
+| **AWS CLF-C02** | Amazon Web Services | Cloud Practitioner |
+| **AZ-104** | Microsoft | Azure Administrator |
+| **Security+** | CompTIA | Core cybersecurity |
 
 Built as a freemium product foundation by **Shohrab Hossen Niaz** ([@shohrabniaz](https://github.com/shohrabniaz)), a CKA-certified DevOps engineer.
 
@@ -53,7 +63,7 @@ npm run lint
 
 ## Question bank format
 
-Questions live in `src/data/questions/{cka,az104,securityplus}.json`.
+Questions live in `src/data/questions/{cka,aws-saa,aws-clf,az104,securityplus}.json`.
 
 ```json
 {
@@ -74,15 +84,15 @@ Questions live in `src/data/questions/{cka,az104,securityplus}.json`.
 
 - `type`: `single` (one answer) or `multiple` (select all that apply)
 - `correct`: array of option ids
-- All sample items are **original study aids** written for this project. They are not affiliated with CNCF, Microsoft, or CompTIA exam content.
+- All sample items are **original study aids** written for this project. They are not affiliated with CNCF, AWS, Microsoft, or CompTIA exam content.
 
 ## Product roadmap
 
-1. **Week 1 (this release)** — PWA shell, original banks, daily quiz, streaks, local stats
+1. **Week 1 (this release)** — PWA shell, original banks (CKA + AWS + Azure + Security+), daily quiz, streaks, local stats
 2. **Week 2** — Accounts (e.g. Supabase/Auth.js free tier), sync progress across devices
 3. **Week 3** — Freemium gate: free daily set + paid expanded banks / weak-area drills
 4. **Week 4** — Spaced repetition, domain performance charts, email reminders
-5. **Later** — Payments (Stripe), admin question editor, mobile store wrappers if demand warrants
+5. **Later** — More AWS associate exams (DVA/SOA), payments (Stripe), admin question editor
 
 ## Project layout
 

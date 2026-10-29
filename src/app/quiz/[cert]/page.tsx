@@ -4,7 +4,13 @@ import { CERTS, isCertId } from "@/lib/certs";
 import { QuizPlayer } from "@/components/QuizPlayer";
 
 export function generateStaticParams() {
-  return [{ cert: "cka" }, { cert: "az104" }, { cert: "securityplus" }];
+  return [
+    { cert: "cka" },
+    { cert: "aws-saa" },
+    { cert: "aws-clf" },
+    { cert: "az104" },
+    { cert: "securityplus" },
+  ];
 }
 
 export default function QuizPage({ params }: { params: { cert: string } }) {

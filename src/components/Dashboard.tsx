@@ -20,7 +20,7 @@ export function Dashboard() {
 
   return (
     <>
-      <Header subtitle="Pick a certification, answer today’s set, and keep your streak alive. Progress is saved in this browser." />
+      <Header subtitle="Daily drills for top cloud exams — CKA, AWS SAA-C03, AWS Cloud Practitioner, AZ-104, and Security+. Progress stays in this browser." />
 
       <section className="mb-8">
         <StreakBadge streak={progress.streak} />
@@ -28,7 +28,7 @@ export function Dashboard() {
 
       <section className="mb-10 space-y-4">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--text-muted)]">
-          Certifications
+          Top exam trainings
         </h2>
         <div className="grid gap-4">
           {CERT_ORDER.map((id) => (
@@ -48,7 +48,7 @@ export function Dashboard() {
         </h2>
         {recent.length === 0 ? (
           <p className="rounded-2xl border border-dashed border-white/10 px-4 py-6 text-sm text-[var(--text-muted)]">
-            No quizzes yet. Start with CKA, AZ-104, or Security+ above.
+            No quizzes yet. Start with CKA or an AWS exam above.
           </p>
         ) : (
           <ul className="space-y-2">

@@ -1,0 +1,482 @@
+[
+  {
+    "id": "aws-saa-001",
+    "cert": "aws-saa",
+    "domain": "Design Secure Architectures",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which AWS service provides a managed virtual private network boundary where you launch EC2 instances with private IP addressing?",
+    "options": [
+      { "id": "a", "text": "Amazon VPC" },
+      { "id": "b", "text": "Amazon CloudFront" },
+      { "id": "c", "text": "AWS CloudTrail" },
+      { "id": "d", "text": "Amazon Athena" }
+    ],
+    "correct": ["a"],
+    "explanation": "Amazon VPC is the isolated network construct for AWS resources. CloudFront is CDN, CloudTrail is API auditing, and Athena queries data in S3."
+  },
+  {
+    "id": "aws-saa-002",
+    "cert": "aws-saa",
+    "domain": "Design Resilient Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "An application must remain available if an Availability Zone fails. What is the most straightforward multi-AZ pattern for a stateless web tier?",
+    "options": [
+      { "id": "a", "text": "Deploy EC2 or containers across at least two AZs behind an Elastic Load Balancer" },
+      { "id": "b", "text": "Run a single large EC2 instance in one AZ with enhanced networking" },
+      { "id": "c", "text": "Store all sessions only on one instance’s local disk" },
+      { "id": "d", "text": "Disable health checks on the load balancer" }
+    ],
+    "correct": ["a"],
+    "explanation": "Spreading compute across AZs with a load balancer and health checks lets traffic shift away from a failed zone. A single AZ or sticky local session storage creates a hard failure domain."
+  },
+  {
+    "id": "aws-saa-003",
+    "cert": "aws-saa",
+    "domain": "Design High-Performing Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Users worldwide download the same large static assets. Which service is designed to cache content at edge locations?",
+    "options": [
+      { "id": "a", "text": "Amazon CloudFront" },
+      { "id": "b", "text": "AWS Direct Connect" },
+      { "id": "c", "text": "Amazon EFS" },
+      { "id": "d", "text": "AWS Config" }
+    ],
+    "correct": ["a"],
+    "explanation": "CloudFront is AWS’s CDN. Direct Connect is private connectivity, EFS is shared file storage, and Config tracks resource configuration."
+  },
+  {
+    "id": "aws-saa-004",
+    "cert": "aws-saa",
+    "domain": "Design Cost-Optimized Architectures",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "For predictable, always-on EC2 capacity with a one- or three-year commitment, which purchasing option typically lowers hourly cost versus On-Demand?",
+    "options": [
+      { "id": "a", "text": "Reserved Instances or Savings Plans" },
+      { "id": "b", "text": "Spot Instances that must never be interrupted" },
+      { "id": "c", "text": "Dedicated Hosts exclusively for every web server" },
+      { "id": "d", "text": "Paying the public data-transfer rate twice" }
+    ],
+    "correct": ["a"],
+    "explanation": "Reserved Instances and Savings Plans discount steady-state usage. Spot is cheaper but interruptible; Dedicated Hosts serve compliance/licensing needs, not general cost reduction."
+  },
+  {
+    "id": "aws-saa-005",
+    "cert": "aws-saa",
+    "domain": "Design Secure Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "An application on EC2 must read objects from a private S3 bucket without embedding long-lived access keys in code. What should you use?",
+    "options": [
+      { "id": "a", "text": "An IAM role attached to the instance (instance profile)" },
+      { "id": "b", "text": "A root user access key hard-coded in the AMI" },
+      { "id": "c", "text": "Make the bucket fully public" },
+      { "id": "d", "text": "Disable S3 server-side encryption permanently" }
+    ],
+    "correct": ["a"],
+    "explanation": "Instance profiles provide temporary credentials via the instance metadata service. Root keys, public buckets, and disabling encryption are insecure anti-patterns."
+  },
+  {
+    "id": "aws-saa-006",
+    "cert": "aws-saa",
+    "domain": "Design Resilient Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Which Amazon RDS deployment option automatically maintains a synchronous standby in a second AZ for automatic failover?",
+    "options": [
+      { "id": "a", "text": "Multi-AZ DB instance deployment" },
+      { "id": "b", "text": "Single-AZ with weekly manual snapshots only" },
+      { "id": "c", "text": "Read replica in the same AZ only" },
+      { "id": "d", "text": "DynamoDB on-demand mode" }
+    ],
+    "correct": ["a"],
+    "explanation": "RDS Multi-AZ provides a standby for high availability and failover. Read replicas mainly scale reads; DynamoDB is a different database service."
+  },
+  {
+    "id": "aws-saa-007",
+    "cert": "aws-saa",
+    "domain": "Design High-Performing Architectures",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "A latency-sensitive cache layer for frequently read key-value data sits in front of a relational database. Which managed AWS service fits best?",
+    "options": [
+      { "id": "a", "text": "Amazon ElastiCache (Redis or Memcached)" },
+      { "id": "b", "text": "AWS Glue crawlers" },
+      { "id": "c", "text": "Amazon Macie" },
+      { "id": "d", "text": "AWS Snowball Edge" }
+    ],
+    "correct": ["a"],
+    "explanation": "ElastiCache provides in-memory caching. Glue is ETL, Macie discovers sensitive data, and Snowball is physical data transfer."
+  },
+  {
+    "id": "aws-saa-008",
+    "cert": "aws-saa",
+    "domain": "Design Secure Architectures",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which service records AWS API calls for governance, compliance, and operational auditing?",
+    "options": [
+      { "id": "a", "text": "AWS CloudTrail" },
+      { "id": "b", "text": "Amazon SQS" },
+      { "id": "c", "text": "Amazon Polly" },
+      { "id": "d", "text": "AWS Snowmobile" }
+    ],
+    "correct": ["a"],
+    "explanation": "CloudTrail logs management (and optionally data) events across the account. SQS is messaging; Polly is speech; Snowmobile is exabyte-scale transfer."
+  },
+  {
+    "id": "aws-saa-009",
+    "cert": "aws-saa",
+    "domain": "Design Cost-Optimized Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Infrequently accessed objects that still need millisecond retrieval when requested are a good fit for which S3 storage class?",
+    "options": [
+      { "id": "a", "text": "S3 Standard-Infrequent Access (Standard-IA)" },
+      { "id": "b", "text": "S3 Glacier Deep Archive as the only tier for hot APIs" },
+      { "id": "c", "text": "S3 One Zone-IA for multi-AZ durability requirements" },
+      { "id": "d", "text": "Instance store volumes on Spot fleets" }
+    ],
+    "correct": ["a"],
+    "explanation": "Standard-IA lowers storage cost for infrequent access while keeping rapid retrieval. Deep Archive has long restore times; One Zone-IA lacks multi-AZ durability."
+  },
+  {
+    "id": "aws-saa-010",
+    "cert": "aws-saa",
+    "domain": "Design Resilient Architectures",
+    "difficulty": "hard",
+    "type": "multiple",
+    "prompt": "Which practices improve resilience for a three-tier web app on AWS? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Auto Scaling groups spanning multiple AZs" },
+      { "id": "b", "text": "Externalizing session state (e.g., ElastiCache or DynamoDB)" },
+      { "id": "c", "text": "Single NAT instance with no monitoring in one AZ for all private subnets" },
+      { "id": "d", "text": "Multi-AZ databases where the data tier requires high availability" }
+    ],
+    "correct": ["a", "b", "d"],
+    "explanation": "Multi-AZ compute, shared session state, and Multi-AZ data stores reduce single points of failure. A lone NAT in one AZ is itself a fragility."
+  },
+  {
+    "id": "aws-saa-011",
+    "cert": "aws-saa",
+    "domain": "Design Secure Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Security groups are stateful firewalls associated with ENIs. Network ACLs are:",
+    "options": [
+      { "id": "a", "text": "Stateless subnet-level allow/deny rules evaluated in order" },
+      { "id": "b", "text": "IAM policies attached to users only" },
+      { "id": "c", "text": "TLS certificates managed by ACM exclusively" },
+      { "id": "d", "text": "S3 bucket policies for object ACLs" }
+    ],
+    "correct": ["a"],
+    "explanation": "NACLs sit at the subnet boundary, are stateless, and use numbered rule priority. They complement—not replace—security groups and IAM."
+  },
+  {
+    "id": "aws-saa-012",
+    "cert": "aws-saa",
+    "domain": "Design High-Performing Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "You need decoupled, durable messaging between microservices with at-least-once delivery and optional delay queues. Which service fits?",
+    "options": [
+      { "id": "a", "text": "Amazon SQS" },
+      { "id": "b", "text": "Amazon CloudWatch Synthetics alone" },
+      { "id": "c", "text": "AWS Certificate Manager" },
+      { "id": "d", "text": "Amazon QuickSight" }
+    ],
+    "correct": ["a"],
+    "explanation": "SQS is the managed queue service for decoupling producers and consumers. The other options are monitoring, certificates, and BI."
+  },
+  {
+    "id": "aws-saa-013",
+    "cert": "aws-saa",
+    "domain": "Design Cost-Optimized Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "A batch analytics job can tolerate interruptions and runs overnight. Which EC2 pricing model usually minimizes cost?",
+    "options": [
+      { "id": "a", "text": "Spot Instances (with a fault-tolerant architecture)" },
+      { "id": "b", "text": "On-Demand only with no capacity flexibility" },
+      { "id": "c", "text": "Dedicated Hosts for every ephemeral worker" },
+      { "id": "d", "text": "Outposts rack for a one-hour job" }
+    ],
+    "correct": ["a"],
+    "explanation": "Spot discounts interruptible workloads. Design for checkpointing/retries. Dedicated Hosts and Outposts are for other constraints."
+  },
+  {
+    "id": "aws-saa-014",
+    "cert": "aws-saa",
+    "domain": "Design Resilient Architectures",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Route 53 health checks combined with failover routing policies are commonly used to:",
+    "options": [
+      { "id": "a", "text": "Direct DNS traffic to a healthy endpoint when the primary fails" },
+      { "id": "b", "text": "Encrypt EBS volumes automatically" },
+      { "id": "c", "text": "Replace IAM users with IAM roles" },
+      { "id": "d", "text": "Compile CloudFormation templates" }
+    ],
+    "correct": ["a"],
+    "explanation": "DNS failover uses health checks to prefer healthy records, supporting active-passive or multi-region patterns."
+  },
+  {
+    "id": "aws-saa-015",
+    "cert": "aws-saa",
+    "domain": "Design Secure Architectures",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "Private connectivity from an on-premises data center to AWS without traversing the public internet is best achieved with:",
+    "options": [
+      { "id": "a", "text": "AWS Direct Connect (often with a VPN as backup)" },
+      { "id": "b", "text": "A public S3 website endpoint" },
+      { "id": "c", "text": "Amazon SES SMTP relay alone" },
+      { "id": "d", "text": "CloudFront signed URLs only" }
+    ],
+    "correct": ["a"],
+    "explanation": "Direct Connect provides dedicated private network links. VPN over the internet is common as backup; S3 websites and SES do not replace private WAN connectivity."
+  },
+  {
+    "id": "aws-saa-016",
+    "cert": "aws-saa",
+    "domain": "Design High-Performing Architectures",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which storage service offers object storage with virtually unlimited capacity via HTTP APIs?",
+    "options": [
+      { "id": "a", "text": "Amazon S3" },
+      { "id": "b", "text": "Amazon EBS gp3 volume attached to one instance" },
+      { "id": "c", "text": "Instance store on a single host" },
+      { "id": "d", "text": "Amazon ECR image layers only" }
+    ],
+    "correct": ["a"],
+    "explanation": "S3 is object storage. EBS and instance store are block storage tied to instances; ECR stores container images."
+  },
+  {
+    "id": "aws-saa-017",
+    "cert": "aws-saa",
+    "domain": "Design Secure Architectures",
+    "difficulty": "medium",
+    "type": "multiple",
+    "prompt": "Which controls harden an S3 bucket holding sensitive data? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Block Public Access settings enabled unless public access is required" },
+      { "id": "b", "text": "Bucket policies / IAM least privilege" },
+      { "id": "c", "text": "Server-side encryption (SSE-S3, SSE-KMS, etc.)" },
+      { "id": "d", "text": "Publishing the bucket name and unrestricted write ACL on social media" }
+    ],
+    "correct": ["a", "b", "c"],
+    "explanation": "Public access blocks, least privilege, and encryption are standard. Advertising open write access invites abuse."
+  },
+  {
+    "id": "aws-saa-018",
+    "cert": "aws-saa",
+    "domain": "Design Cost-Optimized Architectures",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Turning off or right-sizing unused EC2 and idle load balancers primarily improves which Well-Architected pillar?",
+    "options": [
+      { "id": "a", "text": "Cost Optimization" },
+      { "id": "b", "text": "Sustainability only, with no cost impact" },
+      { "id": "c", "text": "Operational Excellence exclusively" },
+      { "id": "d", "text": "Performance Efficiency by adding more idle capacity" }
+    ],
+    "correct": ["a"],
+    "explanation": "Eliminating waste is core cost optimization (and often helps sustainability). Adding idle capacity does the opposite."
+  },
+  {
+    "id": "aws-saa-019",
+    "cert": "aws-saa",
+    "domain": "Design Resilient Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Amazon S3 cross-Region replication is useful when you need to:",
+    "options": [
+      { "id": "a", "text": "Automatically copy objects to a bucket in another Region for DR or locality" },
+      { "id": "b", "text": "Replace IAM authentication" },
+      { "id": "c", "text": "Disable versioning permanently while replicating" },
+      { "id": "d", "text": "Convert objects into EC2 AMIs automatically" }
+    ],
+    "correct": ["a"],
+    "explanation": "CRR asynchronously replicates objects between Regions. Versioning is required on source/destination for CRR; it does not replace IAM or create AMIs."
+  },
+  {
+    "id": "aws-saa-020",
+    "cert": "aws-saa",
+    "domain": "Design High-Performing Architectures",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "A read-heavy relational workload on RDS is saturating the primary. What is a common scaling approach for read traffic?",
+    "options": [
+      { "id": "a", "text": "Add RDS read replicas and direct read queries to them" },
+      { "id": "b", "text": "Delete all indexes to speed writes only" },
+      { "id": "c", "text": "Force all traffic through a single t2.micro forever" },
+      { "id": "d", "text": "Disable Multi-AZ to improve reads" }
+    ],
+    "correct": ["a"],
+    "explanation": "Read replicas offload SELECT traffic. Removing indexes or shrinking capacity usually hurts performance; Multi-AZ is for HA, not read scale."
+  },
+  {
+    "id": "aws-saa-021",
+    "cert": "aws-saa",
+    "domain": "Design Secure Architectures",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "AWS KMS is primarily used to:",
+    "options": [
+      { "id": "a", "text": "Create and control cryptographic keys used to protect data" },
+      { "id": "b", "text": "Host static websites" },
+      { "id": "c", "text": "Run container orchestration instead of ECS/EKS" },
+      { "id": "d", "text": "Provide Layer 7 load balancing" }
+    ],
+    "correct": ["a"],
+    "explanation": "KMS manages encryption keys integrated with many AWS services. Website hosting, containers, and L7 LB are other services."
+  },
+  {
+    "id": "aws-saa-022",
+    "cert": "aws-saa",
+    "domain": "Design Resilient Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "An ALB target group marks instances unhealthy and stops routing to them when:",
+    "options": [
+      { "id": "a", "text": "Configured health checks fail repeatedly" },
+      { "id": "b", "text": "CloudTrail is enabled" },
+      { "id": "c", "text": "An S3 bucket is private" },
+      { "id": "d", "text": "A Savings Plan is purchased" }
+    ],
+    "correct": ["a"],
+    "explanation": "Load balancer health checks remove unhealthy targets from rotation until they recover."
+  },
+  {
+    "id": "aws-saa-023",
+    "cert": "aws-saa",
+    "domain": "Design Cost-Optimized Architectures",
+    "difficulty": "hard",
+    "type": "multiple",
+    "prompt": "Which tactics help control data-transfer costs? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Keep chatty tiers in the same Region/AZ when practical" },
+      { "id": "b", "text": "Use CloudFront for popular public content" },
+      { "id": "c", "text": "Use VPC endpoints to reach S3/DynamoDB without NAT gateway data processing where appropriate" },
+      { "id": "d", "text": "Replicate every object to all Regions regardless of need" }
+    ],
+    "correct": ["a", "b", "c"],
+    "explanation": "Locality, CDN caching, and private endpoints can cut transfer/NAT costs. Blind multi-Region replication increases cost."
+  },
+  {
+    "id": "aws-saa-024",
+    "cert": "aws-saa",
+    "domain": "Design High-Performing Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Amazon DynamoDB is a good fit when you need:",
+    "options": [
+      { "id": "a", "text": "A managed NoSQL key-value / document store with seamless scaling" },
+      { "id": "b", "text": "A POSIX shared filesystem for lift-and-shift NFS apps" },
+      { "id": "c", "text": "A petabyte data warehouse with complex SQL joins as the primary model" },
+      { "id": "d", "text": "A certificate authority" }
+    ],
+    "correct": ["a"],
+    "explanation": "DynamoDB targets highly scalable NoSQL access patterns. EFS covers NFS; Redshift covers warehouses; ACM/Private CA cover certificates."
+  },
+  {
+    "id": "aws-saa-025",
+    "cert": "aws-saa",
+    "domain": "Design Secure Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Which identity approach avoids long-term access keys for applications running on ECS tasks or Lambda?",
+    "options": [
+      { "id": "a", "text": "Task/execution or Lambda execution roles with least-privilege policies" },
+      { "id": "b", "text": "Sharing one IAM user password in Slack" },
+      { "id": "c", "text": "Disabling CloudTrail to hide key usage" },
+      { "id": "d", "text": "Using the account root for daily deploys" }
+    ],
+    "correct": ["a"],
+    "explanation": "Service-linked execution roles mint temporary credentials. Shared users, disabled audit, and root usage violate security best practices."
+  },
+  {
+    "id": "aws-saa-026",
+    "cert": "aws-saa",
+    "domain": "Design Resilient Architectures",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Backing up EBS volumes on a schedule is commonly done with:",
+    "options": [
+      { "id": "a", "text": "EBS snapshots (optionally via Data Lifecycle Manager)" },
+      { "id": "b", "text": "Amazon Polly lexicons" },
+      { "id": "c", "text": "AWS WAF IP sets" },
+      { "id": "d", "text": "Route 53 private hosted zones only" }
+    ],
+    "correct": ["a"],
+    "explanation": "Snapshots capture point-in-time backups of EBS volumes to S3-backed storage managed by AWS."
+  },
+  {
+    "id": "aws-saa-027",
+    "cert": "aws-saa",
+    "domain": "Design High-Performing Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "AWS Global Accelerator improves availability and performance for TCP/UDP apps by:",
+    "options": [
+      { "id": "a", "text": "Routing users over the AWS global network to optimal regional endpoints" },
+      { "id": "b", "text": "Compressing Glacier archives" },
+      { "id": "c", "text": "Replacing security groups" },
+      { "id": "d", "text": "Provisioning bare-metal Outposts automatically" }
+    ],
+    "correct": ["a"],
+    "explanation": "Global Accelerator gives static anycast IPs and intelligent routing to healthy endpoints across Regions."
+  },
+  {
+    "id": "aws-saa-028",
+    "cert": "aws-saa",
+    "domain": "Design Cost-Optimized Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "S3 Intelligent-Tiering is designed to:",
+    "options": [
+      { "id": "a", "text": "Automatically move objects between access tiers as access patterns change" },
+      { "id": "b", "text": "Force all objects into Deep Archive immediately" },
+      { "id": "c", "text": "Disable encryption" },
+      { "id": "d", "text": "Replace VPC flow logs" }
+    ],
+    "correct": ["a"],
+    "explanation": "Intelligent-Tiering monitors access and shifts objects to cheaper tiers when unused, with monitoring charges."
+  },
+  {
+    "id": "aws-saa-029",
+    "cert": "aws-saa",
+    "domain": "Design Secure Architectures",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "A web application needs managed Layer 7 protection against common exploits (SQLi, XSS) and rate-based rules. Which pairing is typical?",
+    "options": [
+      { "id": "a", "text": "AWS WAF associated with CloudFront, ALB, or API Gateway" },
+      { "id": "b", "text": "Amazon SNS topic subscriptions only" },
+      { "id": "c", "text": "Amazon RDS Proxy without a web tier" },
+      { "id": "d", "text": "AWS Backup vault lock alone" }
+    ],
+    "correct": ["a"],
+    "explanation": "WAF inspects HTTP(S) requests at supported edges/load balancers. SNS, RDS Proxy, and Backup solve different problems."
+  },
+  {
+    "id": "aws-saa-030",
+    "cert": "aws-saa",
+    "domain": "Design Resilient Architectures",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Infrastructure as code with CloudFormation or CDK helps resilience and operations mainly by:",
+    "options": [
+      { "id": "a", "text": "Making environments reproducible and reviewable so recovery and scale-out are consistent" },
+      { "id": "b", "text": "Eliminating the need for IAM" },
+      { "id": "c", "text": "Guaranteeing zero AWS service incidents" },
+      { "id": "d", "text": "Replacing application unit tests" }
+    ],
+    "correct": ["a"],
+    "explanation": "Declarative templates recreate stacks predictably after failure or for multi-environment parity. They do not remove IAM or AWS incident risk."
+  }
+]

@@ -1,8 +1,28 @@
 import type { CertId, ProgressState, QuizResult } from "./types";
+import { CERT_ORDER } from "./certs";
 import { dateKey, isSameDay, isYesterday } from "./date";
 
 const STORAGE_KEY = "cert-trainer:progress:v1";
-const CURRENT_VERSION = 1;
+const CURRENT_VERSION = 2;
+
+function emptyCertProgress() {
+  return {
+    totalAnswered: 0,
+    totalCorrect: 0,
+    seenQuestionIds: [] as string[],
+    lastQuizDateKey: null as string | null,
+  };
+}
+
+function emptyCerts(): ProgressState["certs"] {
+  return CERT_ORDER.reduce(
+    (acc, id) => {
+      acc[id] = emptyCertProgress();
+      return acc;
+    },
+    {} as ProgressState["certs"],
+  );
+}
 
 function emptyState(): ProgressState {
   return {
@@ -13,21 +33,8 @@ function emptyState(): ProgressState {
       lastActiveDateKey: null,
       totalDaysActive: 0,
     },
-    certs: {
-      cka: emptyCertProgress(),
-      az104: emptyCertProgress(),
-      securityplus: emptyCertProgress(),
-    },
+    certs: emptyCerts(),
     history: [],
-  };
-}
-
-function emptyCertProgress() {
-  return {
-    totalAnswered: 0,
-    totalCorrect: 0,
-    seenQuestionIds: [] as string[],
-    lastQuizDateKey: null as string | null,
   };
 }
 
@@ -45,17 +52,17 @@ export function loadProgress(): ProgressState {
 
 function normalize(parsed: Partial<ProgressState>): ProgressState {
   const base = emptyState();
+  const certs = emptyCerts();
+  for (const id of CERT_ORDER) {
+    certs[id] = {
+      ...certs[id],
+      ...(parsed.certs?.[id] ?? {}),
+    };
+  }
   return {
     version: CURRENT_VERSION,
     streak: { ...base.streak, ...(parsed.streak ?? {}) },
-    certs: {
-      cka: { ...base.certs.cka, ...(parsed.certs?.cka ?? {}) },
-      az104: { ...base.certs.az104, ...(parsed.certs?.az104 ?? {}) },
-      securityplus: {
-        ...base.certs.securityplus,
-        ...(parsed.certs?.securityplus ?? {}),
-      },
-    },
+    certs,
     history: Array.isArray(parsed.history) ? parsed.history : [],
   };
 }

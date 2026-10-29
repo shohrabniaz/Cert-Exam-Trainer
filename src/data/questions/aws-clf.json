@@ -1,0 +1,482 @@
+[
+  {
+    "id": "aws-clf-001",
+    "cert": "aws-clf",
+    "domain": "Cloud Concepts",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "In the AWS shared responsibility model, which task is typically the customer’s responsibility for EC2?",
+    "options": [
+      { "id": "a", "text": "Guest operating system patches and application security" },
+      { "id": "b", "text": "Physical security of AWS data centers" },
+      { "id": "c", "text": "Hardware decommissioning of hypervisors" },
+      { "id": "d", "text": "Global network backbone maintenance" }
+    ],
+    "correct": ["a"],
+    "explanation": "AWS secures the cloud infrastructure; customers secure what they put in the cloud—including OS, apps, and data for IaaS like EC2."
+  },
+  {
+    "id": "aws-clf-002",
+    "cert": "aws-clf",
+    "domain": "Cloud Concepts",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which cloud benefit describes paying only for the resources you consume?",
+    "options": [
+      { "id": "a", "text": "Pay-as-you-go pricing" },
+      { "id": "b", "text": "Capital expense lock-in for five years" },
+      { "id": "c", "text": "Mandatory upfront hardware purchases" },
+      { "id": "d", "text": "Fixed on-premises depreciation only" }
+    ],
+    "correct": ["a"],
+    "explanation": "Pay-as-you-go converts many costs to variable operational expense based on usage."
+  },
+  {
+    "id": "aws-clf-003",
+    "cert": "aws-clf",
+    "domain": "Security and Compliance",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which AWS service helps you manage users, groups, and permissions for your AWS account?",
+    "options": [
+      { "id": "a", "text": "AWS Identity and Access Management (IAM)" },
+      { "id": "b", "text": "Amazon CloudFront" },
+      { "id": "c", "text": "Amazon Elastic Transcoder" },
+      { "id": "d", "text": "AWS Snowcone" }
+    ],
+    "correct": ["a"],
+    "explanation": "IAM controls authentication and authorization for AWS APIs and resources."
+  },
+  {
+    "id": "aws-clf-004",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Amazon EC2 provides:",
+    "options": [
+      { "id": "a", "text": "Resizable virtual servers in the cloud" },
+      { "id": "b", "text": "A fully managed relational database only" },
+      { "id": "c", "text": "A content delivery network exclusively" },
+      { "id": "d", "text": "Physical badge access to Regions" }
+    ],
+    "correct": ["a"],
+    "explanation": "EC2 is AWS’s core IaaS compute offering for virtual machines."
+  },
+  {
+    "id": "aws-clf-005",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which service is object storage commonly used for backups, static assets, and data lakes?",
+    "options": [
+      { "id": "a", "text": "Amazon S3" },
+      { "id": "b", "text": "Amazon VPC" },
+      { "id": "c", "text": "AWS IAM" },
+      { "id": "d", "text": "Amazon Route 53 health checks only" }
+    ],
+    "correct": ["a"],
+    "explanation": "S3 stores objects. VPC is networking; IAM is identity; Route 53 is DNS."
+  },
+  {
+    "id": "aws-clf-006",
+    "cert": "aws-clf",
+    "domain": "Billing and Pricing",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Which tool estimates the cost of a planned AWS architecture before you deploy it?",
+    "options": [
+      { "id": "a", "text": "AWS Pricing Calculator" },
+      { "id": "b", "text": "Amazon Macie" },
+      { "id": "c", "text": "AWS Artifact agreements only" },
+      { "id": "d", "text": "Amazon Rekognition" }
+    ],
+    "correct": ["a"],
+    "explanation": "The Pricing Calculator models service costs. Macie and Rekognition are ML/security services; Artifact delivers compliance reports."
+  },
+  {
+    "id": "aws-clf-007",
+    "cert": "aws-clf",
+    "domain": "Cloud Concepts",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "An Availability Zone is best described as:",
+    "options": [
+      { "id": "a", "text": "One or more discrete data centers with redundant power and networking within a Region" },
+      { "id": "b", "text": "A global edge location identical to a full Region" },
+      { "id": "c", "text": "A single EC2 instance type" },
+      { "id": "d", "text": "An IAM policy document" }
+    ],
+    "correct": ["a"],
+    "explanation": "Regions contain multiple AZs so you can design for high availability inside a geographic area."
+  },
+  {
+    "id": "aws-clf-008",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Amazon RDS is primarily:",
+    "options": [
+      { "id": "a", "text": "A managed relational database service" },
+      { "id": "b", "text": "A message queue" },
+      { "id": "c", "text": "A DNS firewall" },
+      { "id": "d", "text": "A hardware security key fob" }
+    ],
+    "correct": ["a"],
+    "explanation": "RDS manages engines like MySQL, PostgreSQL, SQL Server, and others with backups and patching options."
+  },
+  {
+    "id": "aws-clf-009",
+    "cert": "aws-clf",
+    "domain": "Security and Compliance",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "What is the recommended practice for the AWS account root user?",
+    "options": [
+      { "id": "a", "text": "Enable MFA and avoid using it for everyday tasks" },
+      { "id": "b", "text": "Share the root password with all developers" },
+      { "id": "c", "text": "Create access keys for root and embed them in apps" },
+      { "id": "d", "text": "Disable CloudTrail for the root user" }
+    ],
+    "correct": ["a"],
+    "explanation": "Root has unrestricted power. Protect it with MFA and prefer IAM users/roles for day-to-day work."
+  },
+  {
+    "id": "aws-clf-010",
+    "cert": "aws-clf",
+    "domain": "Billing and Pricing",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which service provides a consolidated view of AWS costs and usage with filters and reports?",
+    "options": [
+      { "id": "a", "text": "AWS Cost Explorer / Billing & Cost Management tools" },
+      { "id": "b", "text": "Amazon Polly" },
+      { "id": "c", "text": "AWS Snowmobile tracking only" },
+      { "id": "d", "text": "Amazon Lightsail DNS only" }
+    ],
+    "correct": ["a"],
+    "explanation": "Cost Explorer and related billing consoles help analyze spend. Polly is text-to-speech."
+  },
+  {
+    "id": "aws-clf-011",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "AWS Lambda lets you run code without provisioning servers. This model is often called:",
+    "options": [
+      { "id": "a", "text": "Serverless compute" },
+      { "id": "b", "text": "Bare-metal colocation" },
+      { "id": "c", "text": "Mainframe batch only" },
+      { "id": "d", "text": "Physical tape vaulting" }
+    ],
+    "correct": ["a"],
+    "explanation": "Lambda is event-driven serverless compute billed by invocation and duration."
+  },
+  {
+    "id": "aws-clf-012",
+    "cert": "aws-clf",
+    "domain": "Cloud Concepts",
+    "difficulty": "medium",
+    "type": "multiple",
+    "prompt": "Which are advantages of cloud computing? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Trade capital expense for variable expense" },
+      { "id": "b", "text": "Benefit from massive economies of scale" },
+      { "id": "c", "text": "Stop guessing capacity" },
+      { "id": "d", "text": "Require purchasing hardware before every experiment" }
+    ],
+    "correct": ["a", "b", "c"],
+    "explanation": "Cloud value props include OpEx flexibility, scale pricing, and elasticity. Buying hardware first is the opposite of cloud agility."
+  },
+  {
+    "id": "aws-clf-013",
+    "cert": "aws-clf",
+    "domain": "Security and Compliance",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Amazon GuardDuty is best described as:",
+    "options": [
+      { "id": "a", "text": "A threat detection service that analyzes logs and findings" },
+      { "id": "b", "text": "A relational database engine" },
+      { "id": "c", "text": "A CDN configuration wizard" },
+      { "id": "d", "text": "A physical shipping crate" }
+    ],
+    "correct": ["a"],
+    "explanation": "GuardDuty continuously monitors for suspicious activity using sources like CloudTrail, VPC Flow Logs, and DNS logs."
+  },
+  {
+    "id": "aws-clf-014",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Amazon VPC enables you to:",
+    "options": [
+      { "id": "a", "text": "Provision an isolated virtual network for AWS resources" },
+      { "id": "b", "text": "Train foundation models exclusively" },
+      { "id": "c", "text": "Issue SSL certificates to the public internet as a CA browser root" },
+      { "id": "d", "text": "Replace corporate email" }
+    ],
+    "correct": ["a"],
+    "explanation": "VPC is the networking foundation for many AWS resources with subnets, route tables, and gateways."
+  },
+  {
+    "id": "aws-clf-015",
+    "cert": "aws-clf",
+    "domain": "Billing and Pricing",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "The AWS Free Tier typically offers:",
+    "options": [
+      { "id": "a", "text": "Limited free usage of selected services for new or ongoing eligible accounts" },
+      { "id": "b", "text": "Unlimited enterprise support for every account" },
+      { "id": "c", "text": "Free Dedicated Hosts in every Region forever" },
+      { "id": "d", "text": "Zero charges for all data transfer worldwide with no limits" }
+    ],
+    "correct": ["a"],
+    "explanation": "Free Tier has service-specific caps and eligibility rules; it is not unlimited everything."
+  },
+  {
+    "id": "aws-clf-016",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Amazon CloudFront delivers content to users with lower latency by using:",
+    "options": [
+      { "id": "a", "text": "Edge locations / a global content delivery network" },
+      { "id": "b", "text": "A single on-premises NAS in one office" },
+      { "id": "c", "text": "Only Glacier Deep Archive restores" },
+      { "id": "d", "text": "IAM password policies" }
+    ],
+    "correct": ["a"],
+    "explanation": "CloudFront caches and serves content from edge locations close to viewers."
+  },
+  {
+    "id": "aws-clf-017",
+    "cert": "aws-clf",
+    "domain": "Security and Compliance",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "AWS CloudTrail helps with compliance because it:",
+    "options": [
+      { "id": "a", "text": "Records API activity for auditing who did what, when" },
+      { "id": "b", "text": "Encrypts every EBS volume automatically without configuration options" },
+      { "id": "c", "text": "Replaces MFA" },
+      { "id": "d", "text": "Hosts static websites" }
+    ],
+    "correct": ["a"],
+    "explanation": "CloudTrail provides an audit trail of AWS account activity. Encryption and MFA are separate controls."
+  },
+  {
+    "id": "aws-clf-018",
+    "cert": "aws-clf",
+    "domain": "Cloud Concepts",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Elasticity in cloud computing means:",
+    "options": [
+      { "id": "a", "text": "Automatically scaling resources up or down to match demand" },
+      { "id": "b", "text": "Never changing instance size" },
+      { "id": "c", "text": "Buying maximum capacity for peak forever" },
+      { "id": "d", "text": "Disabling monitoring" }
+    ],
+    "correct": ["a"],
+    "explanation": "Elastic services adjust capacity so you are not stuck over-provisioned or under-provisioned."
+  },
+  {
+    "id": "aws-clf-019",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Amazon SQS is used to:",
+    "options": [
+      { "id": "a", "text": "Decouple application components with managed message queues" },
+      { "id": "b", "text": "Render 3D videos" },
+      { "id": "c", "text": "Manage SSL certificates" },
+      { "id": "d", "text": "Provide hardware HSMs exclusively" }
+    ],
+    "correct": ["a"],
+    "explanation": "SQS queues messages between producers and consumers for loose coupling."
+  },
+  {
+    "id": "aws-clf-020",
+    "cert": "aws-clf",
+    "domain": "Billing and Pricing",
+    "difficulty": "medium",
+    "type": "multiple",
+    "prompt": "Which statements about AWS pricing are generally true? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Many services charge for compute time or capacity used" },
+      { "id": "b", "text": "Data transfer out of AWS often incurs charges" },
+      { "id": "c", "text": "Storage is typically billed by amount stored over time" },
+      { "id": "d", "text": "All AWS services are always free with no limits" }
+    ],
+    "correct": ["a", "b", "c"],
+    "explanation": "Compute, storage, and transfer are common billable dimensions. Not everything is unlimited free."
+  },
+  {
+    "id": "aws-clf-021",
+    "cert": "aws-clf",
+    "domain": "Security and Compliance",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Which support plan feature is associated with higher AWS Support tiers (e.g., Business/Enterprise) compared to Basic?",
+    "options": [
+      { "id": "a", "text": "Faster response times and broader technical support cases" },
+      { "id": "b", "text": "Free Unlimited Dedicated Hosts" },
+      { "id": "c", "text": "Removal of the shared responsibility model" },
+      { "id": "d", "text": "Automatic root password sharing" }
+    ],
+    "correct": ["a"],
+    "explanation": "Paid support plans expand channels, response SLAs, and guidance. They do not remove customer security duties."
+  },
+  {
+    "id": "aws-clf-022",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "Amazon Route 53 provides:",
+    "options": [
+      { "id": "a", "text": "Scalable DNS and domain registration / routing features" },
+      { "id": "b", "text": "Block storage volumes for EC2 only" },
+      { "id": "c", "text": "Managed Hadoop clusters exclusively" },
+      { "id": "d", "text": "Email receiving as SES replacement only" }
+    ],
+    "correct": ["a"],
+    "explanation": "Route 53 is AWS’s DNS service with health checks and multiple routing policies."
+  },
+  {
+    "id": "aws-clf-023",
+    "cert": "aws-clf",
+    "domain": "Cloud Concepts",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "A hybrid cloud architecture typically means:",
+    "options": [
+      { "id": "a", "text": "Combining on-premises resources with public cloud services" },
+      { "id": "b", "text": "Using only one laptop offline forever" },
+      { "id": "c", "text": "Deleting all backups" },
+      { "id": "d", "text": "Running exclusively in a single AZ with no DR plan" }
+    ],
+    "correct": ["a"],
+    "explanation": "Hybrid connects private data centers or edge sites with cloud VPCs via VPN/Direct Connect and related patterns."
+  },
+  {
+    "id": "aws-clf-024",
+    "cert": "aws-clf",
+    "domain": "Security and Compliance",
+    "difficulty": "medium",
+    "type": "multiple",
+    "prompt": "Which actions improve account security? Select all that apply.",
+    "options": [
+      { "id": "a", "text": "Enable MFA for privileged users" },
+      { "id": "b", "text": "Follow least privilege in IAM policies" },
+      { "id": "c", "text": "Rotate access keys and prefer roles over long-lived keys" },
+      { "id": "d", "text": "Grant AdministratorAccess to every new hire by default" }
+    ],
+    "correct": ["a", "b", "c"],
+    "explanation": "MFA, least privilege, and short-lived credentials reduce risk. Blanket admin rights expand blast radius."
+  },
+  {
+    "id": "aws-clf-025",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Amazon EBS provides:",
+    "options": [
+      { "id": "a", "text": "Block-level storage volumes for use with EC2 instances" },
+      { "id": "b", "text": "A global CDN" },
+      { "id": "c", "text": "Serverless graph databases only" },
+      { "id": "d", "text": "Public DNS hosting exclusively" }
+    ],
+    "correct": ["a"],
+    "explanation": "EBS volumes attach to instances as durable block devices (with snapshot backups)."
+  },
+  {
+    "id": "aws-clf-026",
+    "cert": "aws-clf",
+    "domain": "Billing and Pricing",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "AWS Budgets can notify you when:",
+    "options": [
+      { "id": "a", "text": "Actual or forecasted costs/usage exceed thresholds you set" },
+      { "id": "b", "text": "An EC2 instance finishes a yum update" },
+      { "id": "c", "text": "A CloudFront cache hit occurs" },
+      { "id": "d", "text": "Someone opens the AWS console FAQ" }
+    ],
+    "correct": ["a"],
+    "explanation": "Budgets track cost and usage with alerts via SNS/email integrations."
+  },
+  {
+    "id": "aws-clf-027",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "hard",
+    "type": "single",
+    "prompt": "Which service is a fully managed NoSQL database commonly cited for single-digit millisecond performance at scale?",
+    "options": [
+      { "id": "a", "text": "Amazon DynamoDB" },
+      { "id": "b", "text": "AWS CloudFormation Designer only" },
+      { "id": "c", "text": "Amazon WorkSpaces" },
+      { "id": "d", "text": "AWS Device Farm" }
+    ],
+    "correct": ["a"],
+    "explanation": "DynamoDB is AWS’s flagship managed NoSQL service. The others are IaC UI, VDI, and mobile testing."
+  },
+  {
+    "id": "aws-clf-028",
+    "cert": "aws-clf",
+    "domain": "Security and Compliance",
+    "difficulty": "easy",
+    "type": "single",
+    "prompt": "AWS Artifact is where customers can:",
+    "options": [
+      { "id": "a", "text": "Download AWS compliance reports and select agreements" },
+      { "id": "b", "text": "Launch GPU clusters for training" },
+      { "id": "c", "text": "Configure NACLs" },
+      { "id": "d", "text": "Purchase Domain names only" }
+    ],
+    "correct": ["a"],
+    "explanation": "Artifact provides on-demand access to security and compliance documentation from AWS."
+  },
+  {
+    "id": "aws-clf-029",
+    "cert": "aws-clf",
+    "domain": "Cloud Concepts",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Agility as a cloud benefit mainly refers to:",
+    "options": [
+      { "id": "a", "text": "Standing up experiments and environments quickly without waiting on hardware lead times" },
+      { "id": "b", "text": "Slower change control than on-premises always" },
+      { "id": "c", "text": "Mandatory multi-year data center builds before coding" },
+      { "id": "d", "text": "Disabling automation" }
+    ],
+    "correct": ["a"],
+    "explanation": "Self-service APIs and global infrastructure let teams iterate faster than traditional procurement cycles."
+  },
+  {
+    "id": "aws-clf-030",
+    "cert": "aws-clf",
+    "domain": "Technology",
+    "difficulty": "medium",
+    "type": "single",
+    "prompt": "Amazon SNS is commonly used to:",
+    "options": [
+      { "id": "a", "text": "Publish messages to subscribers (email, SMS, SQS, Lambda, etc.)" },
+      { "id": "b", "text": "Provide block storage" },
+      { "id": "c", "text": "Replace VPCs" },
+      { "id": "d", "text": "Manage EC2 hypervisors in the data center" }
+    ],
+    "correct": ["a"],
+    "explanation": "SNS is a pub/sub notification service. Storage and networking remain separate services."
+  }
+]

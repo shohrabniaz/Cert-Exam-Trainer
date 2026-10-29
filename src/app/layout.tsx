@@ -5,7 +5,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Cert Exam Trainer",
   description:
-    "Daily practice questions for CKA, AZ-104 and Security+ with streaks and progress tracking.",
+    "Daily practice for top cert exams — CKA, AWS SAA-C03, AWS Cloud Practitioner, AZ-104 and Security+ — with streaks and progress tracking.",
   applicationName: "Cert Exam Trainer",
   authors: [{ name: "Shohrab Hossen Niaz" }],
   manifest: "/manifest.webmanifest",

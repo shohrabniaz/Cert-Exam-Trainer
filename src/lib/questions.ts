@@ -1,10 +1,14 @@
 import type { CertId, Question } from "./types";
 import ckaRaw from "@/data/questions/cka.json";
+import awsSaaRaw from "@/data/questions/aws-saa.json";
+import awsClfRaw from "@/data/questions/aws-clf.json";
 import az104Raw from "@/data/questions/az104.json";
 import securityplusRaw from "@/data/questions/securityplus.json";
 
 const BANK: Record<CertId, Question[]> = {
   cka: ckaRaw as Question[],
+  "aws-saa": awsSaaRaw as Question[],
+  "aws-clf": awsClfRaw as Question[],
   az104: az104Raw as Question[],
   securityplus: securityplusRaw as Question[],
 };
